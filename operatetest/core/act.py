@@ -1,5 +1,7 @@
 import unittest
 
+import sys
+
 from .runner import HTMLTestRunner
 from ..auxiliary import VAR
 from .. import utils
@@ -12,6 +14,7 @@ from .uiautomator import connect
 def initialize():
     try:
         ad = connect(VAR.device_ip)
+        setattr(ad,"click_post_delay",0.5)
         # ad = connect()
         logger.debug("device info:{}".format(ad.info))
         setattr(VAR,"ad",ad)
@@ -66,6 +69,9 @@ def run():
     """
 
     report = VAR.report_dir + '\\report.html'
-    with open(report, 'wb') as f:
-        runner = HTMLTestRunner(f, verbosity=2, title='从0搭建测试框架 灰蓝', description='修改html报告')
-        runner.run(suite)
+    # with open(report, 'wb') as f:
+    #     runner = HTMLTestRunner(f, verbosity=2, title='从0搭建测试框架 灰蓝', description='修改html报告')
+    #     runner.run(suite)
+    from unittest.runner import TextTestRunner
+    runner = TextTestRunner()
+    runner.run(suite)

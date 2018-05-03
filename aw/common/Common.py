@@ -1,10 +1,16 @@
+# Created by yang
+
 import time
 
+from operatetest import keyword
 
+
+@keyword
 def sleep(n):
     time.sleep(n)
 
 
+@keyword
 def touchByText(ad, text):
     """
     根据文本点击
@@ -15,6 +21,7 @@ def touchByText(ad, text):
     ad(text=text).click()
 
 
+@keyword
 def touchByDesc(ad, desc):
     """
     根据描述点击
@@ -25,16 +32,20 @@ def touchByDesc(ad, desc):
     ad(description=desc).click()
 
 
-def launchApp(ad, pkgname):
+@keyword
+def launchApp(ad, pkgname, wait=3):
     """
     启动app
     :param ad: 
-    :param pkgname: 
+    :param pkgname: app 包名
+    :param wait: 等待时间
     :return: 
     """
     ad.app_start(pkgname)
+    time.sleep(wait) if wait else ""
 
 
+@keyword
 def closeApp(ad, pkgname):
     """
     停止app
@@ -45,6 +56,7 @@ def closeApp(ad, pkgname):
     ad.app_stop(pkgname)
 
 
+@keyword
 def touchById(ad, id):
     """
     根据id点击
@@ -55,6 +67,7 @@ def touchById(ad, id):
     ad(resourceId=id).click()
 
 
+@keyword
 def sendText(ad, text, **kwargs):
     """
     点击输入框,输入文本
@@ -65,7 +78,9 @@ def sendText(ad, text, **kwargs):
     """
     ad(**kwargs).set_text(text)
 
-def press(ad,key):
+
+@keyword
+def press(ad, key):
     """
     按键
     :param ad: 
@@ -73,3 +88,9 @@ def press(ad,key):
     :return: 
     """
     ad.press(key)
+
+
+@keyword
+def screenshot(ad):
+    image = ad.screenshot()
+    image.save("home.jpg")
