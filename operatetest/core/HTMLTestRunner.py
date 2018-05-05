@@ -123,8 +123,8 @@ class OutputRedirector(object):
     def flush(self):
         self.fp.flush()
 
-stdout_redirector = OutputRedirector(sys.stdout)
 stderr_redirector = OutputRedirector(sys.stderr)
+stdout_redirector = OutputRedirector(sys.stdout)
 
 
 

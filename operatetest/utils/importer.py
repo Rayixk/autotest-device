@@ -1,6 +1,8 @@
 import importlib
 import os, sys
-from ..utils.log import logger
+from .log import logger
+
+__all__ = ["import_module"]
 
 def import_module(module_path):
     if not os.path.exists(module_path):

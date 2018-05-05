@@ -2,12 +2,12 @@
 Some auxiliary functions
 """
 
-import os
-import json
 import datetime
-from ..conf import settings
-from .exception import ConfigNotExistError,ConfigParseError
-from ..utils import path_join,make_dirs
+import json
+import os
+
+from . import settings
+from .exception import ConfigNotExistError, ConfigParseError
 
 
 def _config():
@@ -44,8 +44,8 @@ VAR = Variable()
 def handle_config():
     if not os.path.isabs(VAR.report_dir):
         now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        cur_dir = path_join(settings.BASE_DIR,VAR.report_dir,now)
-        make_dirs(cur_dir)
+        cur_dir = os.path.join(settings.BASE_DIR, VAR.report_dir, now)
+        os.makedirs(cur_dir,exist_ok=True)
         setattr(VAR,"report_dir",cur_dir)
 
 
