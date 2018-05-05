@@ -26,7 +26,7 @@ import requests
 
 
 from operatetest.core import uiautomator as u2
-from operatetest.core import adbutils
+from operatetest.core import adb
 from operatetest.core.uiautomator import __apk_version__,__atx_agent_version__
 
 
@@ -94,7 +94,7 @@ def cache_download(url, filename=None):
     return storepath
 
 
-class Installer(adbutils.Adb):
+class Installer(adb.Adb):
     def __init__(self, serial=None):
         super(Installer, self).__init__(serial)
         self.sdk = self.getprop('ro.build.version.sdk')
@@ -350,7 +350,7 @@ class MyFire(object):
 
 
 #add by yang
-class Installer2(adbutils.Adb):
+class Installer2(adb.Adb):
     def __init__(self, serial=None):
         super(Installer2, self).__init__(serial)
         self.sdk = self.getprop('ro.build.version.sdk')

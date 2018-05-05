@@ -69,7 +69,7 @@ def initialize():
 if __name__ == '__main__':
 
     # 1
-    initialize()
+    #initialize()
 
     # 2、执行顺序是安加载顺序：先执行test_sub，再执行test_add
     tests = []
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     #     runner.run(suite)
     from unittest.runner import TextTestRunner
 
-    runner = TextTestRunner()
+    runner = TextTestRunner(descriptions='修改html报告')
     runner.run(suite)
 
     print(VAR.stdout.get_value())

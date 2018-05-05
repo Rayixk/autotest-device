@@ -67,7 +67,7 @@ else:  # for py3
     import urllib.parse as urlparse
 
 import requests
-from . import adbutils
+from . import adb
 from ..utils import logger
 
 DEBUG = False
@@ -210,8 +210,8 @@ def connect_usb(serial=None):
     Args:
         serial (str): android device serial
     """
-    adb = adbutils.Adb(serial)
-    lport = adb.forward_port(7912)
+    _adb = adb.Adb(serial)
+    lport = _adb.forward_port(7912)
     return connect_wifi('127.0.0.1:' + str(lport))
 
 
