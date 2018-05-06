@@ -24,17 +24,18 @@ def _config():
     except Exception as e:
         raise ConfigParseError(e)
 
+
 class Variable(dict):
     def __init__(self, *args, **kwargs):
         super(Variable, self).__init__(*args, **kwargs)
         if "config" in kwargs:
             self.config = kwargs["config"]
         else:
-            self.config=_config()
+            self.config = _config()
 
     def __getattr__(self, name):
         if not name in self.config:
-            if name in["cur_case_name",]:
+            if name in ["cur_case_name", ]:
                 return
             else:
                 raise Exception('config has no attr "{}"'.format(name))
@@ -43,14 +44,17 @@ class Variable(dict):
             value = Variable(config=value)
         return value
 
+
 VAR = Variable()
+
 
 def handle_config():
     if not os.path.isabs(VAR.report_dir):
         now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
         cur_dir = os.path.join(settings.BASE_DIR, VAR.report_dir, now)
-        os.makedirs(cur_dir,exist_ok=True)
-        setattr(VAR,"report_dir",cur_dir)
+        os.makedirs(cur_dir, exist_ok=True)
+        setattr(VAR, "report_dir", cur_dir)
+
 
 class TimeList(object):
     def __init__(self):
@@ -59,7 +63,7 @@ class TimeList(object):
     def append(self, *args):
         if len(args) == 1 and args[0] == "\n":
             return
-        if VAR.cur_case_name :
+        if VAR.cur_case_name:
             cur_case_name = VAR.cur_case_name
         else:
             cur_case_name = "operatetest"
@@ -67,7 +71,7 @@ class TimeList(object):
         if cur_case_name in self.d:
             self.d[cur_case_name].append((self.now, *args))
         else:
-            self.d[cur_case_name] = [(self.now, *args),]
+            self.d[cur_case_name] = [(self.now, *args), ]
 
     @property
     def now(self):
@@ -99,10 +103,5 @@ class OutputRedirector(object):
 
 handle_config()
 
-VAR.stdout = sys.stdout  = OutputRedirector(sys.stdout)
-VAR.stderr = sys.stderr  = OutputRedirector(sys.stderr)
-
-
-
-
-
+VAR.stdout = sys.stdout = OutputRedirector(sys.stdout)
+VAR.stderr = sys.stderr = OutputRedirector(sys.stderr)

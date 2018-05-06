@@ -1,7 +1,9 @@
 import contextlib
 import unittest
 
-import sys,re
+import sys, re
+
+import time
 
 from ..auxiliary import VAR
 from ..utils import Logger
@@ -33,6 +35,18 @@ class _Outcome(object):
         self.skipped = []
         self.expectedFailure = None
         self.errors = []
+
+    # add by yang
+    @property
+    def testResult(self):
+        if self.success:
+            return "passed"
+        for test, exc_info in self.errors:
+            if exc_info is not None:
+                if issubclass(exc_info[0], AssertionError):
+                    return "failed"
+                else:
+                    return "error"
 
     @contextlib.contextmanager
     def testPartExecutor(self, test_case, isTest=False):
@@ -67,16 +81,21 @@ class _Outcome(object):
 class TestCase(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.log = Logger.get_logger(self.__class__.__name__)
-        VAR.cur_case_name = self.__class__.__name__
-        s = sys.modules[self.__module__]
-        self.log.info(s.__file__)
-        self.parse_doc(s.__doc__)
+        self.case_name = self.__class__.__name__
+        self.log = Logger.get_logger(self.case_name)
 
         # self.ad = getattr(VAR, "ad")
         # setattr(self.ad,"log",self.log)
 
+    def init(self):
+        self.startTime = time.time()
+        VAR.cur_case_name = self.case_name
+        s = sys.modules[self.__module__]
+        self.log.info(s.__file__)
+        self.parse_doc(s.__doc__)
+
     def run(self, result=None):
+        self.init()
         orig_result = result
         if result is None:
             result = self.defaultTestResult()
@@ -107,20 +126,46 @@ class TestCase(unittest.TestCase):
             self._outcome = outcome
 
             with outcome.testPartExecutor(self):
-                self.log.info("------------------------------  setUp start  -------------------------------")
-                self.setUp()
-                self.log.info("------------------------------  setUp end  ---------------------------------")
+                self.log.info("------------------------------ {} setUp start  -------------------------------".format(
+                    self.case_name))
+                try:
+                    self.setUp()
+                except Exception as e:
+                    self.log.exception(e)
+                    raise e
+                finally:
+                    self.log.info(
+                        "------------------------------ {} setUp end  ------------------ --------------".format(
+                            self.case_name))
             if outcome.success:
                 outcome.expecting_failure = expecting_failure
                 with outcome.testPartExecutor(self, isTest=True):
-                    self.log.info("------------------------------  test start  --------------------------------")
-                    testMethod()
-                    self.log.info("------------------------------  test end  ----------------------------------")
+                    self.log.info(
+                        "------------------------------ {} test start  --------------------------------".format(
+                            self.case_name))
+                    try:
+                        testMethod()
+                    except Exception as e:
+                        self.log.exception(e)
+                        raise e
+                    finally:
+                        self.log.info(
+                            "------------------------------ {} test end  ----------------------------------".format(
+                                self.case_name))
                 outcome.expecting_failure = False
                 with outcome.testPartExecutor(self):
-                    self.log.info("------------------------------  tearDown start  ----------------------------")
-                    self.tearDown()
-                    self.log.info("------------------------------  tearDown end  ------------------------------")
+                    self.log.info(
+                        "------------------------------ {} tearDown start  ----------------------------".format(
+                            self.case_name))
+                    try:
+                        self.tearDown()
+                    except Exception as e:
+                        self.log.exception(e)
+                        raise e
+                    finally:
+                        self.log.info(
+                            "------------------------------ {} tearDown end  ------------------------------".format(
+                                self.case_name))
             self.doCleanups()
             for test, reason in outcome.skipped:
                 self._addSkip(result, test, reason)
@@ -151,12 +196,15 @@ class TestCase(unittest.TestCase):
             # clear the outcome, no more needed
             self._outcome = None
 
-    # ----add begin
+    # ----add begin----
     def collect_something(self, outcome):
-        print(outcome)
+        self.stopTime = time.time()
+        self.timeTaken = self.stopTime - self.startTime
+        self.testResult = outcome.testResult
+        print(self.startTime,self.stopTime,self.timeTaken,self.testResult)
 
-    def parse_doc(self,doc):
+    def parse_doc(self, doc):
         """从当前用例doc解析出用例信息,如Title"""
         ret = re.search(r'@Title：(.*)', doc)
         if ret:
-            self.title=ret.group(1)
+            self.title = ret.group(1)

@@ -36,6 +36,8 @@ if __name__ == '__main__':
     for script in scripts:
         module = utils.import_module(script)
         for name in dir(module):
+            if name in ["TestCase",]:
+                continue
             obj = getattr(module, name)
             if isinstance(obj, type) and issubclass(obj, unittest.TestCase):
                 tests.append(loader.loadTestsFromTestCase(obj))
@@ -47,10 +49,10 @@ if __name__ == '__main__':
     # with open(report, 'wb') as f:
     #     runner = HTMLTestRunner(f, verbosity=2, title='从0搭建测试框架 灰蓝', description='修改html报告')
     #     runner.run(suite)
-    from unittest.runner import TextTestRunner
+    from operatetest.core.runner import TextTestRunner
 
     runner = TextTestRunner(descriptions='修改html报告')
-    runner.run(suite)
+    result = runner.run(suite)
 
     print(VAR.stdout.get_value())
     print(VAR.stderr.get_value())
