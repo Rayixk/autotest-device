@@ -59,9 +59,9 @@ class TextTestResult(result.TestResult):
         super(TextTestResult, self).addSuccess(test)
         if self.showAll:
             self.stream.writeln("ok")
-        elif self.dots:
-            self.stream.write('.')
-            self.stream.flush()
+        # elif self.dots:  #annotate by yang
+        #     self.stream.write('.')
+        #     self.stream.flush()
 
     def addError(self, test, err):
         super(TextTestResult, self).addError(test, err)
@@ -75,9 +75,9 @@ class TextTestResult(result.TestResult):
         super(TextTestResult, self).addFailure(test, err)
         if self.showAll:
             self.stream.writeln("FAIL")
-        elif self.dots:
-            self.stream.write('F')
-            self.stream.flush()
+        # elif self.dots: #annotate by yang
+        #     self.stream.write('F')
+        #     self.stream.flush()
 
     def addSkip(self, test, reason):
         super(TextTestResult, self).addSkip(test, reason)

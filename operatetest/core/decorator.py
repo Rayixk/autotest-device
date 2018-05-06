@@ -1,7 +1,10 @@
+import os
 import re
+import datetime
 import functools
+from ..auxiliary import VAR
 
-from ..utils import screenshort
+
 from .uiautomator import UIAutomatorServer
 
 
@@ -17,14 +20,14 @@ def keyword(func):
 
         curr_line = inspect.stack()[1][4][0].strip().strip("\n")
 
-        _screenshort_log(ad, name, curr_line)
+        _record_screenshot(ad, name, curr_line)
 
         return res
 
     return inner
 
 
-def _screenshort_log(ad, func_name, curr_line):
+def _record_screenshot(ad, func_name, curr_line):
     """截图和记录log"""
 
     if isinstance(ad,UIAutomatorServer):
@@ -37,3 +40,12 @@ def _screenshort_log(ad, func_name, curr_line):
         t = ret.group(0)
         a, b = curr_line.split(t)
         ad.log.info("".join([a, t]))
+
+
+
+def screenshort(d):
+    """截图,并保存,返回路径"""
+    time_stamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    img_path = os.path.join(VAR.screenshoot_dir, "{}.png".format(time_stamp))
+    d.screenshot(img_path)
+    return img_path

@@ -1,12 +1,13 @@
 import contextlib
 import unittest
 
-import sys, re
+import sys, re,os
 
 import time
 
 from ..auxiliary import VAR
 from ..utils import Logger
+from .report import generate_case_report
 
 __all__ = ["TestCase"]
 
@@ -93,6 +94,11 @@ class TestCase(unittest.TestCase):
         s = sys.modules[self.__module__]
         self.log.info(s.__file__)
         self.parse_doc(s.__doc__)
+        self.report_dir = os.path.join(VAR.report_dir,self.case_name)
+        self.screenshoot_dir = os.path.join(self.report_dir,"image")
+        VAR.screenshoot_dir = self.screenshoot_dir
+        os.makedirs(self.report_dir,exist_ok=True)
+        os.makedirs(self.screenshoot_dir,exist_ok=True)
 
     def run(self, result=None):
         self.init()
@@ -179,6 +185,7 @@ class TestCase(unittest.TestCase):
                 else:
                     result.addSuccess(self)
             self.collect_something(outcome)
+            generate_case_report(self)
             return result
         finally:
             result.stopTest(self)
@@ -201,10 +208,9 @@ class TestCase(unittest.TestCase):
         self.stopTime = time.time()
         self.timeTaken = self.stopTime - self.startTime
         self.testResult = outcome.testResult
-        print(self.startTime,self.stopTime,self.timeTaken,self.testResult)
 
     def parse_doc(self, doc):
         """从当前用例doc解析出用例信息,如Title"""
         ret = re.search(r'@Title：(.*)', doc)
         if ret:
-            self.title = ret.group(1)
+            self.case_title = ret.group(1)
