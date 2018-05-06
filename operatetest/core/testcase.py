@@ -1,12 +1,13 @@
 import contextlib
 import unittest
 
-import sys
+import sys,re
 
 from ..auxiliary import VAR
 from ..utils import Logger
 
 __all__ = ["TestCase"]
+
 
 class SkipTest(Exception):
     """
@@ -15,6 +16,7 @@ class SkipTest(Exception):
     Usually you can use TestCase.skipTest() or one of the skipping decorators
     instead of raising this directly.
     """
+
 
 class _ShouldStop(Exception):
     """
@@ -66,6 +68,10 @@ class TestCase(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.log = Logger.get_logger(self.__class__.__name__)
+        VAR.cur_case_name = self.__class__.__name__
+        s = sys.modules[self.__module__]
+        self.log.info(s.__file__)
+        self.parse_doc(s.__doc__)
 
         # self.ad = getattr(VAR, "ad")
         # setattr(self.ad,"log",self.log)
@@ -101,15 +107,20 @@ class TestCase(unittest.TestCase):
             self._outcome = outcome
 
             with outcome.testPartExecutor(self):
+                self.log.info("------------------------------  setUp start  -------------------------------")
                 self.setUp()
+                self.log.info("------------------------------  setUp end  ---------------------------------")
             if outcome.success:
                 outcome.expecting_failure = expecting_failure
                 with outcome.testPartExecutor(self, isTest=True):
+                    self.log.info("------------------------------  test start  --------------------------------")
                     testMethod()
+                    self.log.info("------------------------------  test end  ----------------------------------")
                 outcome.expecting_failure = False
                 with outcome.testPartExecutor(self):
+                    self.log.info("------------------------------  tearDown start  ----------------------------")
                     self.tearDown()
-
+                    self.log.info("------------------------------  tearDown end  ------------------------------")
             self.doCleanups()
             for test, reason in outcome.skipped:
                 self._addSkip(result, test, reason)
@@ -122,6 +133,7 @@ class TestCase(unittest.TestCase):
                         self._addUnexpectedSuccess(result)
                 else:
                     result.addSuccess(self)
+            self.collect_something(outcome)
             return result
         finally:
             result.stopTest(self)
@@ -138,3 +150,13 @@ class TestCase(unittest.TestCase):
 
             # clear the outcome, no more needed
             self._outcome = None
+
+    # ----add begin
+    def collect_something(self, outcome):
+        print(outcome)
+
+    def parse_doc(self,doc):
+        """从当前用例doc解析出用例信息,如Title"""
+        ret = re.search(r'@Title：(.*)', doc)
+        if ret:
+            self.title=ret.group(1)

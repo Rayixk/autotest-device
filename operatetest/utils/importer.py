@@ -14,6 +14,7 @@ def import_module(module_path):
     filename = filename[:-3]
     try:
         module = importlib.import_module(filename)
+        sys.path.pop(0)
         return module
     except ImportError as e:
         logger.exception(e)

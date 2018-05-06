@@ -13,7 +13,7 @@ from aw import *
 from operatetest import *
 
 
-class Test_001(TestCase):
+class Test_002(TestCase):
     def setUp(self):
         # Common.launchApp(self.ad, 'com.joom')
         print("exec setUp")
@@ -22,7 +22,6 @@ class Test_001(TestCase):
     def test(self):
         # Common.touchById(self.ad, "com.joom:id/menu_search")
         print("exec test")
-        3/0
         # Common.touchById(self.ad, "com.joom:id/search_field")
         # Common.sendText(self.ad, "T-sheet", resourceId="com.joom:id/query_field")
         # Common.press(self.ad, "enter")
@@ -31,4 +30,5 @@ class Test_001(TestCase):
     def tearDown(self):
         # Common.closeApp(self.ad, 'com.joom')
         print("exec tearDown")
+        name
         pass
