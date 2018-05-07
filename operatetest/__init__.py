@@ -8,4 +8,4 @@ from .utils import *
 from .core import *
 
 
-logger.info("---------------------------  Operate Test Version {}  ---------------------------".format(VERSION))
+logger.info("---------------------------------  Operate Test Version {}  ---------------------------------".format(VERSION))

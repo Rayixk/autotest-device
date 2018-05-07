@@ -92,7 +92,7 @@ class OutputRedirector(object):
 
     def write(self, s, **kwargs):
         self.fp.write(s)
-        self.l.append(s, "iskeyword") if "iskeyword" in kwargs else self.l.append(s)
+        self.l.append(s, *list(kwargs.keys())) if kwargs else self.l.append(s)
 
     def flush(self):
         self.fp.flush()

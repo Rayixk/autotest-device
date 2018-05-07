@@ -16,16 +16,20 @@ import time
 class Test_001(TestCase):
     def setUp(self):
         # Common.launchApp(self.ad, 'com.joom')
+        self.log.info("Common.launchApp(self.ad, 'com.joom1111111111111')",keyword=True)
+        self.log.info("Common.launchApp(self.ad, 'com.joom')",keyword=True)
         print("exec setUp")
-        time.sleep(1)
+
+        time.sleep(0.2)
         pass
 
     def test(self):
         # Common.touchById(self.ad, "com.joom:id/menu_search")
         print("exec test")
-        time.sleep(1)
+        self.assertEquals(3, 5)
+        time.sleep(0.2)
         # 3/0
-        self.assertEquals(3,5)
+        # self.assertEquals(3,5)
         # Common.touchById(self.ad, "com.joom:id/search_field")
         # Common.sendText(self.ad, "T-sheet", resourceId="com.joom:id/query_field")
         # Common.press(self.ad, "enter")
@@ -34,5 +38,6 @@ class Test_001(TestCase):
     def tearDown(self):
         # Common.closeApp(self.ad, 'com.joom')
         print("exec tearDown")
-        time.sleep(1)
+        itiserror
+        # time.sleep(1)
         pass

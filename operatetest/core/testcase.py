@@ -131,47 +131,51 @@ class TestCase(unittest.TestCase):
         try:
             self._outcome = outcome
 
+            self.log.info("------------------------------------ {} setUp start  -------------------------------------".format(self.case_name), setUp_start=True)
             with outcome.testPartExecutor(self):
-                self.log.info("------------------------------ {} setUp start  -------------------------------".format(
-                    self.case_name))
                 try:
                     self.setUp()
                 except Exception as e:
                     self.log.exception(e)
                     raise e
-                finally:
-                    self.log.info(
-                        "------------------------------ {} setUp end  ------------------ --------------".format(
-                            self.case_name))
+            if outcome.success:
+                self.log.info("------------------------------------ {} setUp end  ---------------------------------------".format(self.case_name), setUp_end=True)
+            else:
+                self.log.error("----------------------------------- {} setUp end  ---------------------------------------".format(self.case_name), setUp_end=True)
+
+            time.sleep(0.2)
             if outcome.success:
                 outcome.expecting_failure = expecting_failure
+                self.log.info("------------------------------------ {} test start  --------------------------------------".format(self.case_name),test_start=True)
                 with outcome.testPartExecutor(self, isTest=True):
-                    self.log.info(
-                        "------------------------------ {} test start  --------------------------------".format(
-                            self.case_name))
                     try:
                         testMethod()
                     except Exception as e:
                         self.log.exception(e)
                         raise e
-                    finally:
-                        self.log.info(
-                            "------------------------------ {} test end  ----------------------------------".format(
-                                self.case_name))
+                if outcome.success:
+                    self.log.info("------------------------------------ {} test end  ----------------------------------------".format(self.case_name),test_end=True)
+                else:
+                    self.log.error("------------------------------------ {} test end  ----------------------------------------".format(self.case_name),test_end=True)
+
                 outcome.expecting_failure = False
+
+                time.sleep(0.2)
+                self.log.info("------------------------------------ {} tearDown start  ----------------------------------".format(self.case_name),tearDown_start=True)
+
+                is_teardown_success=True
                 with outcome.testPartExecutor(self):
-                    self.log.info(
-                        "------------------------------ {} tearDown start  ----------------------------".format(
-                            self.case_name))
                     try:
                         self.tearDown()
                     except Exception as e:
+                        is_teardown_success = False
                         self.log.exception(e)
                         raise e
-                    finally:
-                        self.log.info(
-                            "------------------------------ {} tearDown end  ------------------------------".format(
-                                self.case_name))
+                if is_teardown_success:
+                    self.log.info("------------------------------------ {} tearDown end  ------------------------------------".format(self.case_name),tearDown_end=True)
+                else:
+                    self.log.error("------------------------------------ {} tearDown end  ------------------------------------".format(self.case_name), tearDown_end=True)
+
             self.doCleanups()
             for test, reason in outcome.skipped:
                 self._addSkip(result, test, reason)
@@ -184,6 +188,10 @@ class TestCase(unittest.TestCase):
                         self._addUnexpectedSuccess(result)
                 else:
                     result.addSuccess(self)
+            if outcome.testResult == "passed":
+                self.log.info("----------------------------------- TestCase {} PASSED  ------------------------------------".format(self.case_name),teseCase_end=True)
+            else:
+                self.log.error("----------------------------------- TestCase {} {}  ------------------------------------".format(self.case_name,outcome.testResult.upper()),teseCase_end=True)
             self.collect_something(outcome)
             generate_case_report(self)
             return result

@@ -21,12 +21,9 @@ class Logger(object):
         self.logger.debug(msg)
         self.console_handler.stream = sys.stderr
 
-    def info(self,msg,iskeyword=False):
+    def info(self,msg,**kwargs):
         self.console_handler.stream = sys.stdout
-        if iskeyword:
-            self.logger.info(msg,iskeyword=True)
-        else:
-            self.logger.info(msg)
+        self.logger.info(msg, **kwargs)
         self.console_handler.stream = sys.stderr
 
     def warn(self,msg):
@@ -34,8 +31,8 @@ class Logger(object):
         self.logger.warn(msg)
         self.console_handler.stream = sys.stderr
 
-    def error(self,msg):
-        self.logger.error(msg)
+    def error(self,msg,**kwargs):
+        self.logger.error(msg,**kwargs)
 
     def fatal(self,msg):
         self.logger.fatal(msg)
