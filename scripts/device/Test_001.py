@@ -26,7 +26,7 @@ class Test_001(TestCase):
     def test(self):
         # Common.touchById(self.ad, "com.joom:id/menu_search")
         print("exec test")
-        self.assertEquals(3, 5)
+        # self.assertEquals(3, 5)
         time.sleep(0.2)
         # 3/0
         # self.assertEquals(3,5)
@@ -38,6 +38,6 @@ class Test_001(TestCase):
     def tearDown(self):
         # Common.closeApp(self.ad, 'com.joom')
         print("exec tearDown")
-        itiserror
-        # time.sleep(1)
+        # itiserror
+        time.sleep(0.2)
         pass

@@ -33,7 +33,7 @@ def touchByDesc(ad, desc):
 
 
 @keyword
-def launchApp(ad, pkgname, wait=3):
+def launchApp(ad, pkgname, wait=5):
     """
     启动app
     :param ad: 

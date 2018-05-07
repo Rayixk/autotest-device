@@ -25,7 +25,7 @@ def initialize():
 if __name__ == '__main__':
 
     # 1
-    #initialize()
+    # initialize()
 
     # 2、执行顺序是安加载顺序：先执行test_sub，再执行test_add
     tests = []
@@ -45,10 +45,6 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite(tests)
 
-    report = VAR.report_dir + '\\report.html'
-    # with open(report, 'wb') as f:
-    #     runner = HTMLTestRunner(f, verbosity=2, title='从0搭建测试框架 灰蓝', description='修改html报告')
-    #     runner.run(suite)
     from operatetest.core.runner import TextTestRunner
 
     runner = TextTestRunner(descriptions='修改html报告')

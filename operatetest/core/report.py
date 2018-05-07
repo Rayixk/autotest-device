@@ -95,7 +95,7 @@ def x__(case_msg):
 def _find(case_msg,index):
     copy_case_msg = copy.deepcopy(case_msg)
     for i in case_msg[index-1::-1]:
-        if i[3]:
+        if i[3] and i[3] not in ["img_path",]:
             return copy_case_msg.index(i)
 
 def __x(case_msg):
@@ -125,8 +125,13 @@ def _x(i):
         a, b = i[2][23:].split(":", maxsplit=1)
         i[2] = b.strip()
     i[2] = i[2].strip("\n")
+
     if len(i) == 3:
         i.append("")
+
+    if i[3]=="img_path":
+        t = os.path.join(os.path.split(os.path.dirname(i[2]))[1], os.path.basename(i[2]))
+        i[2]=t
 
     return i
 

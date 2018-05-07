@@ -4,9 +4,8 @@ logger.info('test log')
 """
 import sys,os
 
-from operatetest.auxiliary import settings
 from . import logging
-from ..auxiliary import VAR
+from ..auxiliary import VAR,settings
 
 __all__ = ["Logger","logger"]
 
@@ -16,10 +15,16 @@ class Logger(object):
         self.logger = logger
         self.console_handler=console_handler
 
-    def debug(self,msg):
+    def debug(self,msg,**kwargs):
         self.console_handler.stream = sys.stdout
-        self.logger.debug(msg)
+        self.logger.debug(msg,**kwargs)
         self.console_handler.stream = sys.stderr
+
+        if getattr(logging, "DEBUG") < getattr(logging, settings.LOG['console_level']):
+            #说明debug的内容不会被输出到控制台,需要单独加入stdout
+            if "img_path" in kwargs:
+                VAR.stdout.l.append(msg, *list(kwargs.keys()))
+
 
     def info(self,msg,**kwargs):
         self.console_handler.stream = sys.stdout

@@ -5,6 +5,8 @@ import sys, re,os
 
 import time
 
+import datetime
+
 from ..auxiliary import VAR
 from ..utils import Logger
 from .report import generate_case_report
@@ -82,23 +84,25 @@ class _Outcome(object):
 class TestCase(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    def init(self):
         self.case_name = self.__class__.__name__
         self.log = Logger.get_logger(self.case_name)
 
         # self.ad = getattr(VAR, "ad")
-        # setattr(self.ad,"log",self.log)
+        # setattr(self.ad, "log", self.log)
 
-    def init(self):
-        self.startTime = time.time()
+        self.startTime = datetime.datetime.now()
         VAR.cur_case_name = self.case_name
         s = sys.modules[self.__module__]
         self.log.info(s.__file__)
         self.parse_doc(s.__doc__)
         self.report_dir = os.path.join(VAR.report_dir,self.case_name)
-        self.screenshoot_dir = os.path.join(self.report_dir,"image")
-        VAR.screenshoot_dir = self.screenshoot_dir
+        self.screen_shot_dir = os.path.join(self.report_dir, "image")
+        VAR.screen_shot_dir = self.screen_shot_dir
         os.makedirs(self.report_dir,exist_ok=True)
-        os.makedirs(self.screenshoot_dir,exist_ok=True)
+        if VAR.screen_shot:
+            os.makedirs(self.screen_shot_dir, exist_ok=True)
 
     def run(self, result=None):
         self.init()
@@ -189,9 +193,9 @@ class TestCase(unittest.TestCase):
                 else:
                     result.addSuccess(self)
             if outcome.testResult == "passed":
-                self.log.info("----------------------------------- TestCase {} PASSED  ------------------------------------".format(self.case_name),teseCase_end=True)
+                self.log.info("------------------------------------ TestCase {} PASSED  ------------------------------------".format(self.case_name),teseCase_end=True)
             else:
-                self.log.error("----------------------------------- TestCase {} {}  ------------------------------------".format(self.case_name,outcome.testResult.upper()),teseCase_end=True)
+                self.log.error("------------------------------------ TestCase {} {}  ------------------------------------".format(self.case_name,outcome.testResult.upper()),teseCase_end=True)
             self.collect_something(outcome)
             generate_case_report(self)
             return result
@@ -213,9 +217,20 @@ class TestCase(unittest.TestCase):
 
     # ----add begin----
     def collect_something(self, outcome):
-        self.stopTime = time.time()
-        self.timeTaken = self.stopTime - self.startTime
+        self.stopTime = datetime.datetime.now()
         self.testResult = outcome.testResult
+
+        t = dict(zip(("h", "min", "s"), str(self.stopTime - self.startTime).split(":")))
+        t["h"] = t["h"].strip("0")
+        t["min"] = t["min"].strip("0")
+        t["s"] = t["s"][1:-3] if t["s"].startswith("0") else t["s"][0:-3]
+
+        self.timeTaken = " ".join(("".join((j, i)) for i, j in t.items() if j))
+
+        self.startTime = str(self.startTime)[:-7]
+        self.stopTime = str(self.stopTime)[:-7]
+
+
 
     def parse_doc(self, doc):
         """从当前用例doc解析出用例信息,如Title"""

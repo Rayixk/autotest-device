@@ -75,12 +75,12 @@ class TimeList(object):
 
     @property
     def now(self):
-        ct = time.time()
-        local_time = time.localtime(ct)
-        data_head = time.strftime("%Y-%m-%d %H:%M:%S", local_time)
-        data_secs = (ct - int(ct)) * 1000
-        time_stamp = "%s.%03d" % (data_head, data_secs)
-        return time_stamp
+        # ct = time.time()
+        # local_time = time.localtime(ct)
+        # data_head = time.strftime("%Y-%m-%d %H:%M:%S", local_time)
+        # data_secs = (ct - int(ct)) * 1000
+        # time_stamp = "%s.%03d" % (data_head, data_secs)
+        return str(datetime.datetime.now())[:-3]
 
 
 class OutputRedirector(object):
@@ -92,7 +92,7 @@ class OutputRedirector(object):
 
     def write(self, s, **kwargs):
         self.fp.write(s)
-        self.l.append(s, *list(kwargs.keys())) if kwargs else self.l.append(s)
+        self.l.append(s, *list(kwargs.keys()))
 
     def flush(self):
         self.fp.flush()

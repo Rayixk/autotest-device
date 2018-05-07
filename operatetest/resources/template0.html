@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ case.case_name }}</title>
 
-    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>-->
     <style media="all" type="text/css">
         /* Generic and misc styles */
         body {
@@ -717,7 +717,7 @@
         </tr>
         <tr>
             <th>End Time:</th>
-            <td>{{ case.endTime }}</td>
+            <td>{{ case.stopTime }}</td>
         </tr>
         <tr>
             <th>Elapsed Time:</th>
@@ -739,17 +739,22 @@
         <table class="details" style="width: 105em">
             <tbody>
                 {% for msg in setup_msg %}
-                    {% if msg.3 and msg.0=="info" %}
+                    {% if msg.3 =="img_path" %}
+                        <tr>
+                            <th></th>
+                            <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
+                        </tr>
+                    {% elif msg.3 and msg.0 =="info" %}
                         <tr class="keyword-success">
                             <th>{{ msg.1 }}</th>
                             <td>{{ msg.2 }}</td>
                         </tr>
-                    {% elif msg.3 and msg.0=="error" %}
+                    {% elif msg.3 and msg.0 =="error" %}
                         <tr class="keyword-error">
                             <th>{{ msg.1 }}</th>
                             <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
                         </tr>
-                    {% elif msg.0=="error" %}
+                    {% elif msg.0 =="error" %}
                         <tr class="log-error">
                             <th>{{ msg.1 }}</th>
                             <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
@@ -772,7 +777,12 @@
             <table class="details" style="width: 105em">
                 <tbody>
                     {% for msg in test_msg %}
-                        {% if msg.3 and msg.0=="info" %}
+                        {% if msg.3 =="img_path" %}
+                            <tr>
+                                <th></th>
+                                <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
+                            </tr>
+                        {% elif msg.3 and msg.0=="info" %}
                             <tr class="keyword-success">
                                 <th>{{ msg.1 }}</th>
                                 <td>{{ msg.2 }}</td>
@@ -806,7 +816,12 @@
         <table class="details" style="width: 105em">
             <tbody>
                 {% for msg in teardown_msg %}
-                    {% if msg.3 and msg.0=="info" %}
+                    {% if msg.3 =="img_path" %}
+                        <tr>
+                            <th></th>
+                            <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
+                        </tr>
+                    {% elif msg.3 and msg.0=="info" %}
                         <tr class="keyword-success">
                             <th>{{ msg.1 }}</th>
                             <td>{{ msg.2 }}</td>
@@ -838,14 +853,15 @@
 </div>
 
 <script>
+
     //点击图片会放大缩小
     function imgClick(self) {
-        if ($(self).attr("status") === "small") {
-            $(self).css("width", 400);
-            $(self).attr("status", "big")
-        } else {
-            $(self).css("width", 200);
-            $(self).attr("status", "small")
+        if (self.getAttribute("status") === "small"){
+            self.setAttribute("status","big");
+            self.setAttribute("width",400)
+        }else{
+            self.setAttribute("status","small");
+            self.setAttribute("width",200)
         }
     }
 </script>
