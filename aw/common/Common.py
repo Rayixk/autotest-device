@@ -6,7 +6,7 @@ from operatetest import keyword
 
 
 @keyword
-def sleep(n):
+def wait(ad,n):
     time.sleep(n)
 
 

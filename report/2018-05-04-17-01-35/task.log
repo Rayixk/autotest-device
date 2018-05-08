@@ -1,0 +1,8 @@
+'2018-05-04 17:02:40,296 - operatetest - INFO - -----------------------  Operate Test Version 1.0.0  -----------------------'
+'2018-05-04 17:02:41,033 - operatetest - DEBUG - device info:{'currentPackageName': 'com.miui.home', 'displayHeight': 1920, 'displayRotation': 0, 'displaySizeDpX': 360, 'displaySizeDpY': 640, 'displayWidth': 1080, 'productName': 'nikel', 'screenOn': True, 'sdkInt': 23, 'naturalOrientation': True}'
+'2018-05-04 17:02:45,344 - __report__ - INFO - D:\dev\autotest_device\report\20180504170245.png'
+'2018-05-04 17:02:45,344 - __report__ - INFO - Common.launchApp(self.ad, 'com.joom')'
+'2018-05-04 17:02:50,594 - __report__ - INFO - D:\dev\autotest_device\report\20180504170250.png'
+'2018-05-04 17:02:50,594 - __report__ - INFO - Common.touchById(self.ad, "com.joom:id/menu_search")'
+'2018-05-04 17:02:51,889 - __report__ - INFO - D:\dev\autotest_device\report\20180504170251.png'
+'2018-05-04 17:02:51,889 - __report__ - INFO - Common.closeApp(self.ad, 'com.joom')'

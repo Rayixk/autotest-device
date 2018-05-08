@@ -11,5 +11,5 @@ LOG = {
     "console_level": "INFO",
     "file_level": "DEBUG",
     "console_pattern": "%(asctime)s  %(levelname)s : %(message)s",
-    "file_pattern": "%(asctime)s  %(name)s  %(filename)s:%(lineno)s  %(levelname)s : %(message)s",
+    "file_pattern": "%(asctime)s  %(name)s  %(levelname)s : %(message)s",
 }

@@ -247,6 +247,7 @@ class UIAutomatorServer(object):
         Raises:
             EnvironmentError
         """
+        self.log = logger #add by yang
         self._host = host
         self._port = port
         self._reqsess = TimeoutRequestsSession()  # use requests.Session to enable HTTP Keep-Alive
@@ -576,9 +577,11 @@ class UIAutomatorServer(object):
             a UTF-8 encoded string for stdout merged with stderr, after the entire shell command is completed.
         """
         cmdline = args[0] if len(args) == 1 else list2cmdline(args)
+        self.log.debug(cmdline)
         ret = self._reqsess.post(self.path2url('/shell'), data={'command': cmdline})
         if ret.status_code != 200:
             raise RuntimeError("device agent responds with an error code %d" % ret.status_code)
+        self.log.debug(ret.json())
         return ret.json().get('output')
 
     def app_start(self, pkg_name, activity=None, extras={}, wait=True, stop=False, unlock=False):
@@ -879,6 +882,7 @@ class Session(object):
     )
 
     def __init__(self, server, pkg_name=None, pid=None):
+        self.log = server.log #add by yang
         self.server = server
         self._pkg_name = pkg_name
         self._pid = pid
@@ -1290,6 +1294,7 @@ def wrap_wait_exists(fn):
 
 class UiObject(object):
     def __init__(self, session, selector):
+        self.log = session.log # add by yang
         self.session = session
         self.selector = selector
         self.jsonrpc = session.jsonrpc
@@ -1320,6 +1325,7 @@ class UiObject(object):
             UiObjectNotFoundError
         """
         info = self.info
+        self.log.debug(info)
         bounds = self.info.get('visibleBounds') or info.get("bounds")
         x = (bounds['left'] + bounds['right']) / 2
         y = (bounds['top'] + bounds['bottom']) / 2

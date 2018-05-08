@@ -11,20 +11,16 @@
 
 from aw import *
 from operatetest import *
-import time
 
 class Test_004(TestCase):
     def setUp(self):
         # Common.launchApp(self.ad, 'com.joom')
         print("exec setUp")
-        time.sleep(0.2)
         pass
 
     def test(self):
         # Common.touchById(self.ad, "com.joom:id/menu_search")
-        self.log.info('Common.touchById(self.ad, "com.joom:id/menu_search")', keyword=True)
         print("exec test")
-        time.sleep(0.2)
         # Common.touchById(self.ad, "com.joom:id/search_field")
         # Common.sendText(self.ad, "T-sheet", resourceId="com.joom:id/query_field")
         # Common.press(self.ad, "enter")

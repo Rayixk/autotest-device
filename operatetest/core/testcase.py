@@ -89,8 +89,8 @@ class TestCase(unittest.TestCase):
         self.case_name = self.__class__.__name__
         self.log = Logger.get_logger(self.case_name)
 
-        # self.ad = getattr(VAR, "ad")
-        # setattr(self.ad, "log", self.log)
+        self.ad = getattr(VAR, "ad")
+        setattr(self.ad, "log", self.log)
 
         self.startTime = datetime.datetime.now()
         VAR.cur_case_name = self.case_name

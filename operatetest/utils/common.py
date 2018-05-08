@@ -18,9 +18,8 @@ def get_all_files(dirname):
     for maindir, subdir, file_name_list in os.walk(dirname):
         for filename in file_name_list:
             apath = os.path.join(maindir, filename)
-            if "__" in apath or ".pyc" in apath:
-                continue
-            result.append(apath)
+            if apath.endswith(".py") and "__" not in apath:
+                result.append(apath)
     return result
 
 

@@ -1,0 +1,101 @@
+2018-05-08 18:19:06.557  operatetest  INFO : ---------------------------------  Operate Test Version 1.0.0  ---------------------------------
+2018-05-08 18:19:06.663  operatetest  DEBUG : device info:{'currentPackageName': 'com.github.uiautomator', 'displayHeight': 1920, 'displayRotation': 0, 'displaySizeDpX': 360, 'displaySizeDpY': 640, 'displayWidth': 1080, 'productName': 'nikel', 'screenOn': True, 'sdkInt': 23, 'naturalOrientation': True}
+2018-05-08 18:19:06.666  Test_001  INFO : D:\dev\autotest_device\scripts\device\Test_001.py
+2018-05-08 18:19:06.668  Test_001  INFO : ------------------------------------ Test_001 setUp start  -------------------------------------
+2018-05-08 18:19:06.745  Test_001  INFO : Common.launchApp(self.ad, 'com.joom')
+2018-05-08 18:19:06.746  Test_001  DEBUG : monkey -p com.joom -c android.intent.category.LAUNCHER 1
+2018-05-08 18:19:07.449  Test_001  DEBUG : {'error': None, 'output': 'Events injected: 1\n## Network stats: elapsed time=26ms (0ms mobile, 0ms wifi, 26ms not connected)\n'}
+2018-05-08 18:19:12.876  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\image\20180508181912.png
+2018-05-08 18:19:12.877  Test_001  INFO : ------------------------------------ Test_001 setUp end  ---------------------------------------
+2018-05-08 18:19:13.077  Test_001  INFO : ------------------------------------ Test_001 test start  --------------------------------------
+2018-05-08 18:19:13.100  Test_001  INFO : Common.touchById(self.ad, "com.joom:id/menu_search")
+2018-05-08 18:19:13.322  operatetest  DEBUG : {'bounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'childCount': 0, 'className': 'android.widget.TextView', 'contentDescription': 'Search', 'packageName': 'com.joom', 'resourceName': 'com.joom:id/menu_search', 'text': None, 'visibleBounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': True, 'focused': False, 'longClickable': True, 'scrollable': False, 'selected': False}
+2018-05-08 18:19:16.048  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\image\20180508181915.png
+2018-05-08 18:19:16.054  Test_001  INFO : Common.touchById(self.ad, "com.joom:id/search_field")
+2018-05-08 18:19:16.817  operatetest  DEBUG : {'bounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'childCount': 2, 'className': 'android.widget.FrameLayout', 'contentDescription': None, 'packageName': 'com.joom', 'resourceName': 'com.joom:id/search_field', 'text': None, 'visibleBounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': False, 'focused': False, 'longClickable': False, 'scrollable': False, 'selected': False}
+2018-05-08 18:19:19.618  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\image\20180508181919.png
+2018-05-08 18:19:19.625  Test_001  INFO : Common.sendText(self.ad, "T-sheet", resourceId="com.joom:id/query_field")
+2018-05-08 18:19:20.860  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\image\20180508181920.png
+2018-05-08 18:19:20.867  Test_001  INFO : Common.press(self.ad, "enter")
+2018-05-08 18:19:21.469  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\image\20180508181921.png
+2018-05-08 18:19:21.476  Test_001  INFO : Common.sleep(self.ad, 5)
+2018-05-08 18:19:26.881  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\image\20180508181926.png
+2018-05-08 18:19:26.882  Test_001  INFO : ------------------------------------ Test_001 test end  ----------------------------------------
+2018-05-08 18:19:27.082  Test_001  INFO : ------------------------------------ Test_001 tearDown start  ----------------------------------
+2018-05-08 18:19:27.107  Test_001  INFO : Common.closeApp(self.ad, 'com.joom')
+2018-05-08 18:19:27.108  Test_001  DEBUG : am force-stop com.joom
+2018-05-08 18:19:27.906  Test_001  DEBUG : {'error': None, 'output': ''}
+2018-05-08 18:19:28.111  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\image\20180508181927.png
+2018-05-08 18:19:28.112  Test_001  INFO : ------------------------------------ Test_001 tearDown end  ------------------------------------
+2018-05-08 18:19:28.112  Test_001  INFO : ------------------------------------ TestCase Test_001 PASS  ------------------------------------
+2018-05-08 18:19:28.279  Test_001  INFO : Generate TestCase Report > D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_001\Test_001.html
+2018-05-08 18:19:28.282  Test_002  INFO : D:\dev\autotest_device\scripts\device\Test_002.py
+2018-05-08 18:19:28.284  Test_002  INFO : ------------------------------------ Test_002 setUp start  -------------------------------------
+2018-05-08 18:19:28.292  Test_002  INFO : Common.launchApp(self.ad, 'com.joom')
+2018-05-08 18:19:28.292  Test_002  DEBUG : monkey -p com.joom -c android.intent.category.LAUNCHER 1
+2018-05-08 18:19:28.749  Test_002  DEBUG : {'error': None, 'output': 'Events injected: 1\n## Network stats: elapsed time=38ms (0ms mobile, 0ms wifi, 38ms not connected)\n'}
+2018-05-08 18:19:34.163  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\image\20180508181933.png
+2018-05-08 18:19:34.163  Test_002  INFO : ------------------------------------ Test_002 setUp end  ---------------------------------------
+2018-05-08 18:19:34.364  Test_002  INFO : ------------------------------------ Test_002 test start  --------------------------------------
+2018-05-08 18:19:34.374  Test_002  INFO : Common.touchById(self.ad, "com.joom:id/menu_search")
+2018-05-08 18:19:34.555  operatetest  DEBUG : {'bounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'childCount': 0, 'className': 'android.widget.TextView', 'contentDescription': 'Search', 'packageName': 'com.joom', 'resourceName': 'com.joom:id/menu_search', 'text': None, 'visibleBounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': True, 'focused': False, 'longClickable': True, 'scrollable': False, 'selected': False}
+2018-05-08 18:19:37.299  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\image\20180508181936.png
+2018-05-08 18:19:37.305  Test_002  INFO : Common.touchById(self.ad, "com.joom:id/search_field")
+2018-05-08 18:19:37.503  operatetest  DEBUG : {'bounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'childCount': 2, 'className': 'android.widget.FrameLayout', 'contentDescription': None, 'packageName': 'com.joom', 'resourceName': 'com.joom:id/search_field', 'text': None, 'visibleBounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': False, 'focused': False, 'longClickable': False, 'scrollable': False, 'selected': False}
+2018-05-08 18:19:40.211  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\image\20180508181939.png
+2018-05-08 18:19:40.216  Test_002  INFO : Common.sendText(self.ad, "Book", resourceId="com.joom:id/query_field")
+2018-05-08 18:19:41.303  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\image\20180508181940.png
+2018-05-08 18:19:41.309  Test_002  INFO : Common.press(self.ad, "enter")
+2018-05-08 18:19:42.504  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\image\20180508181942.png
+2018-05-08 18:19:42.510  Test_002  INFO : Common.sleep(self.ad, 3)
+2018-05-08 18:19:46.150  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\image\20180508181945.png
+2018-05-08 18:19:46.150  Test_002  INFO : ------------------------------------ Test_002 test end  ----------------------------------------
+2018-05-08 18:19:46.351  Test_002  INFO : ------------------------------------ Test_002 tearDown start  ----------------------------------
+2018-05-08 18:19:46.358  Test_002  INFO : Common.closeApp(self.ad, 'com.joom')
+2018-05-08 18:19:46.358  Test_002  DEBUG : am force-stop com.joom
+2018-05-08 18:19:47.278  Test_002  DEBUG : {'error': None, 'output': ''}
+2018-05-08 18:19:47.554  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\image\20180508181947.png
+2018-05-08 18:19:47.555  Test_002  INFO : ------------------------------------ Test_002 tearDown end  ------------------------------------
+2018-05-08 18:19:47.555  Test_002  INFO : ------------------------------------ TestCase Test_002 PASS  ------------------------------------
+2018-05-08 18:19:47.697  Test_002  INFO : Generate TestCase Report > D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_002\Test_002.html
+2018-05-08 18:19:47.699  Test_003  INFO : D:\dev\autotest_device\scripts\device2\Test_003.py
+2018-05-08 18:19:47.702  Test_003  INFO : ------------------------------------ Test_003 setUp start  -------------------------------------
+2018-05-08 18:19:47.702  Test_003  INFO : ------------------------------------ Test_003 setUp end  ---------------------------------------
+2018-05-08 18:19:47.904  Test_003  INFO : ------------------------------------ Test_003 test start  --------------------------------------
+2018-05-08 18:19:47.905  Test_003  INFO : ------------------------------------ Test_003 test end  ----------------------------------------
+2018-05-08 18:19:48.106  Test_003  INFO : ------------------------------------ Test_003 tearDown start  ----------------------------------
+2018-05-08 18:19:48.106  Test_003  ERROR : name 'name' is not defined
+Traceback (most recent call last):
+  File "D:\dev\autotest_device\operatetest\core\testcase.py", line 173, in run
+    self.tearDown()
+  File "D:\dev\autotest_device\scripts\device2\Test_003.py", line 35, in tearDown
+    name
+NameError: name 'name' is not defined
+2018-05-08 18:19:48.110  Test_003  ERROR : ------------------------------------ Test_003 tearDown end  ------------------------------------
+2018-05-08 18:19:48.112  Test_003  ERROR : ------------------------------------ TestCase Test_003 ERROR  ------------------------------------
+2018-05-08 18:19:48.329  Test_003  INFO : Generate TestCase Report > D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_003\Test_003.html
+2018-05-08 18:19:48.331  Test_004  INFO : D:\dev\autotest_device\scripts\device2\Test_004.py
+2018-05-08 18:19:48.335  Test_004  INFO : ------------------------------------ Test_004 setUp start  -------------------------------------
+2018-05-08 18:19:48.335  Test_004  INFO : ------------------------------------ Test_004 setUp end  ---------------------------------------
+2018-05-08 18:19:48.536  Test_004  INFO : ------------------------------------ Test_004 test start  --------------------------------------
+2018-05-08 18:19:48.537  Test_004  INFO : Common.touchById(self.ad, "com.joom:id/menu_search")
+2018-05-08 18:19:48.538  Test_004  ERROR : 3 != 5
+Traceback (most recent call last):
+  File "D:\dev\autotest_device\operatetest\core\testcase.py", line 156, in run
+    testMethod()
+  File "D:\dev\autotest_device\scripts\device2\Test_004.py", line 30, in test
+    self.assertEquals(3,5)
+  File "c:\python36\Lib\unittest\case.py", line 1312, in deprecated_func
+    return original_func(*args, **kwargs)
+  File "c:\python36\Lib\unittest\case.py", line 821, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "c:\python36\Lib\unittest\case.py", line 814, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 3 != 5
+2018-05-08 18:19:48.540  Test_004  ERROR : ------------------------------------ Test_004 test end  ----------------------------------------
+2018-05-08 18:19:48.741  Test_004  INFO : ------------------------------------ Test_004 tearDown start  ----------------------------------
+2018-05-08 18:19:48.743  Test_004  INFO : ------------------------------------ Test_004 tearDown end  ------------------------------------
+2018-05-08 18:19:48.744  Test_004  ERROR : ------------------------------------ TestCase Test_004 FAIL  ------------------------------------
+2018-05-08 18:19:48.919  Test_004  INFO : Generate TestCase Report > D:\dev\autotest_device\report\task_2018-05-08-18-19-05\Test_004\Test_004.html
+2018-05-08 18:19:48.988  operatetest  INFO : Generate Task Report > D:\dev\autotest_device\report\task_2018-05-08-18-19-05\index.html
+2018-05-08 18:19:48.990  operatetest  INFO : ALL Task Done，The Result is Total：4  Pass：2  Fail：1  Error：1

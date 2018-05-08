@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ case.case_name }}</title>
+    <title>task_2018-05-08-18-19-05</title>
 
-    <!--<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>-->
     <style media="all" type="text/css">
         /* Generic and misc styles */
         body {
@@ -22,9 +21,9 @@
             font-size: 1em;
         }
 
-        th, td {
-            vertical-align: top;
-        }
+        /*th, td {*/
+            /*vertical-align: top;  annotate by yang */
+        /*}*/
 
         br {
             mso-data-placement: same-cell; /* maintain line breaks in Excel */
@@ -312,7 +311,7 @@
 
         .details th {
             background: white;
-            width: 12em;
+            width: 10em;
             white-space: nowrap;
             text-align: left;
             vertical-align: top;
@@ -442,7 +441,7 @@
 
         #test-details > tbody > tr:hover {
             background: #f4f4f4;
-            cursor: pointer;
+            /*cursor: pointer; annotate by yang*/
         }
 
         #test-details th, #test-details td {
@@ -469,7 +468,7 @@
         }
 
         .details-col-name {
-            min-width: 20em;
+            width: 30em;
             font-weight: bold;
         }
 
@@ -487,21 +486,21 @@
         }
 
         .details-col-status {
-            width: 4.5em;
+            width: 6em;
             text-align: center;
         }
 
         .details-col-msg {
-            min-width: 20em;
+            min-width: 28em;
         }
 
         .details-col-elapsed {
-            width: 7em;
+            width: 8em;
             text-align: center;
         }
 
         .details-col-times {
-            width: 11em;
+            width: 12em;
             white-space: nowrap;
             text-align: center;
         }
@@ -531,9 +530,9 @@
             color: black;
         }
 
-        #header {
-            width: auto;
-        }
+        /*#header {*/
+            /*width: auto;*/
+        /*} annotate by yang*/
 
         .details, .statistics {
             width: 100%;
@@ -665,9 +664,6 @@
         .passed-color {
             color: green;
         }
-        .failed-color{
-            color: #f33
-        }
 
         .keyword-success {
             color: green;
@@ -677,193 +673,172 @@
         .keyword-success th {
             color: green;
         }
-
-        .keyword-error {
-            color: #f33;
-            font-weight: 600;
-        }
-
-        .keyword-error th {
-            color: #f33;
-        }
-
-        .log-error {
-            color: #f33;
-        }
-
-        .log-error th {
-            color: #f33;
-        }
-
     </style>
 
 
 </head>
-{% if case.testResult == "pass" %}
-    <body style="background-color: rgb(153, 238, 153);">
-{% else %}
+
+
     <body style="background-color: rgb(255, 102, 102);">
 
-{% endif %}
 
-<div id="header">
-    <h1 style="padding-bottom: 12px">{{ case.case_name }} &nbsp;&nbsp;{{ case.case_title }}</h1>
+<div id="header" style="width: 100%;min-height: 1000px">
+    <h1 style="padding-bottom: 12px">task_2018-05-08-18-19-05</h1>
     <h2>Summary Information</h2>
     <table class="details" style="width: 53em">
         <tbody>
         <tr>
             <th>Start Time:</th>
-            <td>{{ case.startTime }}</td>
+            <td>2018-05-08 18:19:06</td>
         </tr>
         <tr>
             <th>End Time:</th>
-            <td>{{ case.stopTime }}</td>
+            <td>2018-05-08 18:19:48</td>
         </tr>
         <tr>
             <th>Elapsed Time:</th>
-            <td>{{ case.timeTaken }}</td>
+            <td>42.255s</td>
         </tr>
         <tr>
             <th>Status:</th>
-            {% if case.testResult == "pass" %}
-                <td class="passed-color">{{ case.testResult }}</td>
-            {% else %}
-                <td class="failed-color">{{ case.testResult }}</td>
-            {% endif %}
+            
+                <td>Pass 2 &nbsp;&nbsp;&nbsp;<span style="color:#F00;">Fail 2</span></td>
+            
         </tr>
         </tbody>
     </table>
 
-    <div>
-        <h2 style="margin-top: 30px;margin-bottom: 10px">setUp</h2>
-        <table class="details" style="width: 105em">
-            <tbody>
-                {% for msg in setup_msg %}
-                    {% if msg.3 =="img_path" %}
-                        <tr>
-                            <th></th>
-                            <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
-                        </tr>
-                    {% elif msg.3 and msg.0 =="info" %}
-                        <tr class="keyword-success">
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% elif msg.3 and msg.0 =="error" %}
-                        <tr class="keyword-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% elif msg.0 =="error" %}
-                        <tr class="log-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% endif %}
 
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h2 style="margin-top: 30px;margin-bottom: 10px">Test Details</h2>
+    <table id="test-details" class="tablesorter tablesorter-default">
+        <thead>
+        <tr class="tablesorter-headerRow">
+            <th class="details-col-name" title="Name" data-column="0">
+                Name
+            </th>
+            <th class="details-col-doc" title="Documentation" data-column="1">
+                Documentation
+            </th>
+            <th class="details-col-status" title="Status" data-column="4">
+                Status
+            </th>
+            <th class="details-col-msg " title="Message" data-column="5">
+                Message
+            </th>
+            <th class="details-col-elapsed" title="Elapsed Time" data-column="6">
+                Elapsed
+            </th>
+            <th class="details-col-times" title="Start Time / End Time" data-column="7">
+                Start / End
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td class="details-col-name">
+                        <div><a href="Test_001/Test_001.html">Test_001</a></div>
 
-    {% if test_msg %}
-        <div>
-            <h2 style="margin-top: 30px;margin-bottom: 10px">test</h2>
-            <table class="details" style="width: 105em">
-                <tbody>
-                    {% for msg in test_msg %}
-                        {% if msg.3 =="img_path" %}
-                            <tr>
-                                <th></th>
-                                <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
-                            </tr>
-                        {% elif msg.3 and msg.0=="info" %}
-                            <tr class="keyword-success">
-                                <th>{{ msg.1 }}</th>
-                                <td>{{ msg.2 }}</td>
-                            </tr>
-                        {% elif msg.3 and msg.0=="error" %}
-                            <tr class="keyword-error">
-                                <th>{{ msg.1 }}</th>
-                                <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                            </tr>
-                        {% elif msg.0=="error" %}
-                            <tr class="log-error">
-                                <th>{{ msg.1 }}</th>
-                                <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <th>{{ msg.1 }}</th>
-                                <td>{{ msg.2 }}</td>
-                            </tr>
-                        {% endif %}
+                    </td>
+                    <td class="details-col-doc">
+                        <div class="doc details-limited">JOOM测试-商品搜索T-sheet测试</div>
+                    </td>
+                    <td class="details-col-status">
+                        
+                            <div><span class="label pass">PASS</span></div>
+                        
+                    </td>
+                    <td class="details-col-msg">
+                        <div class="message details-limited" style="color: #f00"></div>
+                    </td>
+                    <td class="details-col-elapsed">
+                        <div>21.445s</div>
+                    </td>
+                    <td class="details-col-times">
+                        <div>2018-05-08 18:19:06<br>2018-05-08 18:19:28</div>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td class="details-col-name">
+                        <div><a href="Test_002/Test_002.html">Test_002</a></div>
 
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% endif %}
+                    </td>
+                    <td class="details-col-doc">
+                        <div class="doc details-limited">JOOM测试-商品搜索Book测试</div>
+                    </td>
+                    <td class="details-col-status">
+                        
+                            <div><span class="label pass">PASS</span></div>
+                        
+                    </td>
+                    <td class="details-col-msg">
+                        <div class="message details-limited" style="color: #f00"></div>
+                    </td>
+                    <td class="details-col-elapsed">
+                        <div>19.272s</div>
+                    </td>
+                    <td class="details-col-times">
+                        <div>2018-05-08 18:19:28<br>2018-05-08 18:19:47</div>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td class="details-col-name">
+                        <div><a href="Test_003/Test_003.html">Test_003</a></div>
 
-    {% if teardown_msg %}
-        <div>
-        <h2 style="margin-top: 30px;margin-bottom: 10px">tearDown</h2>
-        <table class="details" style="width: 105em">
-            <tbody>
-                {% for msg in teardown_msg %}
-                    {% if msg.3 =="img_path" %}
-                        <tr>
-                            <th></th>
-                            <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
-                        </tr>
-                    {% elif msg.3 and msg.0=="info" %}
-                        <tr class="keyword-success">
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% elif msg.3 and msg.0=="error" %}
-                        <tr class="keyword-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% elif msg.0=="error" %}
-                        <tr class="log-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% endif %}
+                    </td>
+                    <td class="details-col-doc">
+                        <div class="doc details-limited">JOOM测试-商品搜索T-sheet测试</div>
+                    </td>
+                    <td class="details-col-status">
+                        
+                            <div><span class="label fail">ERROR</span></div>
+                        
+                    </td>
+                    <td class="details-col-msg">
+                        <div class="message details-limited" style="color: #f00">NameError：name 'name' is not defined</div>
+                    </td>
+                    <td class="details-col-elapsed">
+                        <div>0.412s</div>
+                    </td>
+                    <td class="details-col-times">
+                        <div>2018-05-08 18:19:47<br>2018-05-08 18:19:48</div>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td class="details-col-name">
+                        <div><a href="Test_004/Test_004.html">Test_004</a></div>
 
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    {% endif %}
+                    </td>
+                    <td class="details-col-doc">
+                        <div class="doc details-limited">JOOM测试-商品搜索T-sheet测试</div>
+                    </td>
+                    <td class="details-col-status">
+                        
+                            <div><span class="label fail">FAIL</span></div>
+                        
+                    </td>
+                    <td class="details-col-msg">
+                        <div class="message details-limited" style="color: #f00">AssertionError：3 != 5</div>
+                    </td>
+                    <td class="details-col-elapsed">
+                        <div>0.414s</div>
+                    </td>
+                    <td class="details-col-times">
+                        <div>2018-05-08 18:19:48<br>2018-05-08 18:19:48</div>
+                    </td>
+                </tr>
+            
+        </tbody>
+    </table>
+
 
     <div style="height: 200px">&nbsp;</div>
 </div>
 
 <script>
-
-    //点击图片会放大缩小
-    function imgClick(self) {
-        if (self.getAttribute("status") === "small"){
-            self.setAttribute("status","big");
-            self.setAttribute("width",400)
-        }else{
-            self.setAttribute("status","small");
-            self.setAttribute("width",200)
-        }
-    }
 </script>
 </body>
 </html>

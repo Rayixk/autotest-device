@@ -1388,6 +1388,8 @@ class Logger(Filterer):
             f = f.f_back
         rv = "(unknown file)", 0, "(unknown function)", None
         while hasattr(f, "f_code"):
+            # co = f.f_code modify by yang,因为log经过包装,要准确指示打印的模块和行数必须使co指向前一步
+            f = f.f_back
             co = f.f_code
             filename = os.path.normcase(co.co_filename)
             if filename == _srcfile:

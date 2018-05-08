@@ -1,0 +1,62 @@
+2018-05-08 18:14:31.334  operatetest  INFO : ---------------------------------  Operate Test Version 1.0.0  ---------------------------------
+2018-05-08 18:14:31.435  operatetest  DEBUG : device info:{'currentPackageName': 'com.github.uiautomator', 'displayHeight': 1920, 'displayRotation': 0, 'displaySizeDpX': 360, 'displaySizeDpY': 640, 'displayWidth': 1080, 'productName': 'nikel', 'screenOn': True, 'sdkInt': 23, 'naturalOrientation': True}
+2018-05-08 18:14:31.438  Test_001  INFO : D:\dev\autotest_device\scripts\device\Test_001.py
+2018-05-08 18:14:31.440  Test_001  INFO : ------------------------------------ Test_001 setUp start  -------------------------------------
+2018-05-08 18:14:31.522  Test_001  INFO : Common.launchApp(self.ad, 'com.joom')
+2018-05-08 18:14:31.522  Test_001  DEBUG : monkey -p com.joom -c android.intent.category.LAUNCHER 1
+2018-05-08 18:14:32.225  Test_001  DEBUG : {'error': None, 'output': 'Events injected: 1\n## Network stats: elapsed time=38ms (0ms mobile, 0ms wifi, 38ms not connected)\n'}
+2018-05-08 18:14:37.590  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\image\20180508181437.png
+2018-05-08 18:14:37.590  Test_001  INFO : ------------------------------------ Test_001 setUp end  ---------------------------------------
+2018-05-08 18:14:37.791  Test_001  INFO : ------------------------------------ Test_001 test start  --------------------------------------
+2018-05-08 18:14:37.806  Test_001  INFO : Common.touchById(self.ad, "com.joom:id/menu_search")
+2018-05-08 18:14:38.609  operatetest  DEBUG : {'bounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'childCount': 0, 'className': 'android.widget.TextView', 'contentDescription': 'Search', 'packageName': 'com.joom', 'resourceName': 'com.joom:id/menu_search', 'text': None, 'visibleBounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': True, 'focused': False, 'longClickable': True, 'scrollable': False, 'selected': False}
+2018-05-08 18:14:41.357  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\image\20180508181440.png
+2018-05-08 18:14:41.364  Test_001  INFO : Common.touchById(self.ad, "com.joom:id/search_field")
+2018-05-08 18:14:41.598  operatetest  DEBUG : {'bounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'childCount': 2, 'className': 'android.widget.FrameLayout', 'contentDescription': None, 'packageName': 'com.joom', 'resourceName': 'com.joom:id/search_field', 'text': None, 'visibleBounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': False, 'focused': False, 'longClickable': False, 'scrollable': False, 'selected': False}
+2018-05-08 18:14:44.265  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\image\20180508181443.png
+2018-05-08 18:14:44.271  Test_001  INFO : Common.sendText(self.ad, "T-sheet", resourceId="com.joom:id/query_field")
+2018-05-08 18:14:45.498  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\image\20180508181445.png
+2018-05-08 18:14:45.504  Test_001  INFO : Common.press(self.ad, "enter")
+2018-05-08 18:14:46.123  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\image\20180508181445.png
+2018-05-08 18:14:46.130  Test_001  INFO : Common.sleep(self.ad, 5)
+2018-05-08 18:14:51.652  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\image\20180508181451.png
+2018-05-08 18:14:51.653  Test_001  INFO : ------------------------------------ Test_001 test end  ----------------------------------------
+2018-05-08 18:14:51.853  Test_001  INFO : ------------------------------------ Test_001 tearDown start  ----------------------------------
+2018-05-08 18:14:51.860  Test_001  INFO : Common.closeApp(self.ad, 'com.joom')
+2018-05-08 18:14:51.860  Test_001  DEBUG : am force-stop com.joom
+2018-05-08 18:14:52.680  Test_001  DEBUG : {'error': None, 'output': ''}
+2018-05-08 18:14:52.911  Test_001  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\image\20180508181452.png
+2018-05-08 18:14:52.912  Test_001  INFO : ------------------------------------ Test_001 tearDown end  ------------------------------------
+2018-05-08 18:14:52.912  Test_001  INFO : ------------------------------------ TestCase Test_001 PASS  ------------------------------------
+2018-05-08 18:14:53.083  Test_001  INFO : Generate TestCase Report > D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_001\Test_001.html
+2018-05-08 18:14:53.084  Test_002  INFO : D:\dev\autotest_device\scripts\device\Test_002.py
+2018-05-08 18:14:53.087  Test_002  INFO : ------------------------------------ Test_002 setUp start  -------------------------------------
+2018-05-08 18:14:53.093  Test_002  INFO : Common.launchApp(self.ad, 'com.joom')
+2018-05-08 18:14:53.094  Test_002  DEBUG : monkey -p com.joom -c android.intent.category.LAUNCHER 1
+2018-05-08 18:14:53.538  Test_002  DEBUG : {'error': None, 'output': 'Events injected: 1\n## Network stats: elapsed time=15ms (0ms mobile, 0ms wifi, 15ms not connected)\n'}
+2018-05-08 18:14:58.912  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\image\20180508181458.png
+2018-05-08 18:14:58.913  Test_002  INFO : ------------------------------------ Test_002 setUp end  ---------------------------------------
+2018-05-08 18:14:59.114  Test_002  INFO : ------------------------------------ Test_002 test start  --------------------------------------
+2018-05-08 18:14:59.128  Test_002  INFO : Common.touchById(self.ad, "com.joom:id/menu_search")
+2018-05-08 18:14:59.530  operatetest  DEBUG : {'bounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'childCount': 0, 'className': 'android.widget.TextView', 'contentDescription': 'Search', 'packageName': 'com.joom', 'resourceName': 'com.joom:id/menu_search', 'text': None, 'visibleBounds': {'bottom': 216, 'left': 936, 'right': 1080, 'top': 72}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': True, 'focused': False, 'longClickable': True, 'scrollable': False, 'selected': False}
+2018-05-08 18:15:02.355  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\image\20180508181501.png
+2018-05-08 18:15:02.360  Test_002  INFO : Common.touchById(self.ad, "com.joom:id/search_field")
+2018-05-08 18:15:02.589  operatetest  DEBUG : {'bounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'childCount': 2, 'className': 'android.widget.FrameLayout', 'contentDescription': None, 'packageName': 'com.joom', 'resourceName': 'com.joom:id/search_field', 'text': None, 'visibleBounds': {'bottom': 228, 'left': 216, 'right': 1080, 'top': 60}, 'checkable': False, 'checked': False, 'clickable': True, 'enabled': True, 'focusable': False, 'focused': False, 'longClickable': False, 'scrollable': False, 'selected': False}
+2018-05-08 18:15:05.424  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\image\20180508181504.png
+2018-05-08 18:15:05.431  Test_002  INFO : Common.sendText(self.ad, "Book", resourceId="com.joom:id/query_field")
+2018-05-08 18:15:06.590  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\image\20180508181506.png
+2018-05-08 18:15:06.596  Test_002  INFO : Common.press(self.ad, "enter")
+2018-05-08 18:15:07.912  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\image\20180508181507.png
+2018-05-08 18:15:07.918  Test_002  INFO : Common.sleep(self.ad, 3)
+2018-05-08 18:15:11.359  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\image\20180508181510.png
+2018-05-08 18:15:11.360  Test_002  INFO : ------------------------------------ Test_002 test end  ----------------------------------------
+2018-05-08 18:15:11.560  Test_002  INFO : ------------------------------------ Test_002 tearDown start  ----------------------------------
+2018-05-08 18:15:11.599  Test_002  INFO : Common.closeApp(self.ad, 'com.joom')
+2018-05-08 18:15:11.602  Test_002  DEBUG : am force-stop com.joom
+2018-05-08 18:15:12.417  Test_002  DEBUG : {'error': None, 'output': ''}
+2018-05-08 18:15:12.619  Test_002  DEBUG : D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\image\20180508181512.png
+2018-05-08 18:15:12.620  Test_002  INFO : ------------------------------------ Test_002 tearDown end  ------------------------------------
+2018-05-08 18:15:12.620  Test_002  INFO : ------------------------------------ TestCase Test_002 PASS  ------------------------------------
+2018-05-08 18:15:12.764  Test_002  INFO : Generate TestCase Report > D:\dev\autotest_device\report\task_2018-05-08-18-14-30\Test_002\Test_002.html
+2018-05-08 18:15:12.822  operatetest  INFO : Generate Task Report > D:\dev\autotest_device\report\task_2018-05-08-18-14-30\index.html
+2018-05-08 18:15:12.823  operatetest  INFO : ALL Task Done，The Result is Total：2  Pass：2  Fail：0  Error：0

@@ -11,23 +11,17 @@
 
 from aw import *
 from operatetest import *
-import time
 
 class Test_003(TestCase):
     def setUp(self):
         # Common.launchApp(self.ad, 'com.joom')
-        self.log.info("Common.launchApp(self.ad, 'com.joom1111111111111')",keyword=True)
-        self.log.info("Common.launchApp(self.ad, 'com.joom')",keyword=True)
         print("exec setUp")
 
-        time.sleep(0.2)
-        pass
 
     def test(self):
         # Common.touchById(self.ad, "com.joom:id/menu_search")
         print("exec test")
         # self.assertEquals(3, 5)
-        time.sleep(0.2)
         # 3/0
         # self.assertEquals(3,5)
         # Common.touchById(self.ad, "com.joom:id/search_field")
@@ -38,6 +32,5 @@ class Test_003(TestCase):
     def tearDown(self):
         # Common.closeApp(self.ad, 'com.joom')
         print("exec tearDown")
+        name
         # itiserror
-        time.sleep(0.2)
-        pass

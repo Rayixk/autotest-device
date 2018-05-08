@@ -1,4 +1,4 @@
-import os,sys,time,unittest
+import os, sys, time, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
@@ -9,12 +9,10 @@ from operatetest import utils
 
 logger = utils.logger
 
-
-
 def initialize():
     try:
         ad = connect(VAR.device_ip)
-        setattr(ad, "click_post_delay", 0.5)
+        setattr(ad, "click_post_delay", 1)  # 设置每次点击后,等待1s
         # ad = connect()
         logger.debug("device info:{}".format(ad.info))
         setattr(VAR, "ad", ad)
@@ -35,26 +33,35 @@ def get_scripts():
     return scripts
 
 
-if __name__ == '__main__':
-
-    # 1
-    # initialize()
-
-    # 2、执行顺序是安加载顺序：先执行test_sub，再执行test_add
+def get_tests():
     tests = []
-    loader = unittest.TestLoader()
 
     scripts = get_scripts()
 
+    loader = unittest.TestLoader()
+
     for script in scripts:
         module = utils.import_module(script)
-        for name in dir(module):
-            if name in ["TestCase",]:
-                continue
-            obj = getattr(module, name)
-            if isinstance(obj, type) and issubclass(obj, unittest.TestCase):
-                tests.append(loader.loadTestsFromTestCase(obj))
+        file_name = os.path.basename(script)[:-3]
 
+        obj = getattr(module, file_name, None)
+
+        if not obj:
+            raise Exception("在测试用例：{}中未获取到测试类：{}，测试类名需和测试用例名保持一致".format(script, file_name))
+
+        if isinstance(obj, type) and issubclass(obj, unittest.TestCase):
+            tests.append(loader.loadTestsFromTestCase(obj))
+        else:
+            raise Exception("测试用例：{}中的测试类：{}不是TestCase的子类，请继承TestCase".format(script, file_name))
+
+    return tests
+
+
+if __name__ == '__main__':
+
+    tests = get_tests()
+
+    initialize()
 
     suite = unittest.TestSuite(tests)
 
@@ -70,4 +77,3 @@ if __name__ == '__main__':
 
     # print(VAR.stdout.get_value())
     # print(VAR.stderr.get_value())
-

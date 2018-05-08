@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ case.case_name }}</title>
+    <title>Test_002</title>
 
     <!--<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>-->
     <style media="all" type="text/css">
@@ -699,37 +699,32 @@
 
 
 </head>
-{% if case.testResult == "pass" %}
-    <body style="background-color: rgb(153, 238, 153);">
-{% else %}
-    <body style="background-color: rgb(255, 102, 102);">
 
-{% endif %}
+    <body style="background-color: rgb(153, 238, 153);">
+
 
 <div id="header">
-    <h1 style="padding-bottom: 12px">{{ case.case_name }} &nbsp;&nbsp;{{ case.case_title }}</h1>
+    <h1 style="padding-bottom: 12px">Test_002 &nbsp;&nbsp;JOOM测试-商品搜索Book测试</h1>
     <h2>Summary Information</h2>
     <table class="details" style="width: 53em">
         <tbody>
         <tr>
             <th>Start Time:</th>
-            <td>{{ case.startTime }}</td>
+            <td>2018-05-08 18:19:28</td>
         </tr>
         <tr>
             <th>End Time:</th>
-            <td>{{ case.stopTime }}</td>
+            <td>2018-05-08 18:19:47</td>
         </tr>
         <tr>
             <th>Elapsed Time:</th>
-            <td>{{ case.timeTaken }}</td>
+            <td>19.272s</td>
         </tr>
         <tr>
             <th>Status:</th>
-            {% if case.testResult == "pass" %}
-                <td class="passed-color">{{ case.testResult }}</td>
-            {% else %}
-                <td class="failed-color">{{ case.testResult }}</td>
-            {% endif %}
+            
+                <td class="passed-color">pass</td>
+            
         </tr>
         </tbody>
     </table>
@@ -738,116 +733,208 @@
         <h2 style="margin-top: 30px;margin-bottom: 10px">setUp</h2>
         <table class="details" style="width: 105em">
             <tbody>
-                {% for msg in setup_msg %}
-                    {% if msg.3 =="img_path" %}
+                
+                    
+                        <tr>
+                            <th>2018-05-08 18:19:28.282</th>
+                            <td>D:\dev\autotest_device\scripts\device\Test_002.py</td>
+                        </tr>
+                    
+
+                
+                    
+                        <tr class="keyword-success">
+                            <th>2018-05-08 18:19:28.284</th>
+                            <td>------------------------------------ Test_002 setUp start  -------------------------------------</td>
+                        </tr>
+                    
+
+                
+                    
+                        <tr class="keyword-success">
+                            <th>2018-05-08 18:19:28.292</th>
+                            <td>Common.launchApp(self.ad, 'com.joom')</td>
+                        </tr>
+                    
+
+                
+                    
                         <tr>
                             <th></th>
-                            <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
+                            <td><img status="small" onclick="imgClick(this)" src="image\20180508181933.png" alt="" width="200px"></td>
                         </tr>
-                    {% elif msg.3 and msg.0 =="info" %}
-                        <tr class="keyword-success">
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% elif msg.3 and msg.0 =="error" %}
-                        <tr class="keyword-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% elif msg.0 =="error" %}
-                        <tr class="log-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% endif %}
+                    
 
-                {% endfor %}
+                
+                    
+                        <tr class="keyword-success">
+                            <th>2018-05-08 18:19:34.164</th>
+                            <td>------------------------------------ Test_002 setUp end  ---------------------------------------</td>
+                        </tr>
+                    
+
+                
             </tbody>
         </table>
     </div>
 
-    {% if test_msg %}
+    
         <div>
             <h2 style="margin-top: 30px;margin-bottom: 10px">test</h2>
             <table class="details" style="width: 105em">
                 <tbody>
-                    {% for msg in test_msg %}
-                        {% if msg.3 =="img_path" %}
+                    
+                        
+                            <tr class="keyword-success">
+                                <th>2018-05-08 18:19:34.364</th>
+                                <td>------------------------------------ Test_002 test start  --------------------------------------</td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr class="keyword-success">
+                                <th>2018-05-08 18:19:34.374</th>
+                                <td>Common.touchById(self.ad, "com.joom:id/menu_search")</td>
+                            </tr>
+                        
+
+                    
+                        
                             <tr>
                                 <th></th>
-                                <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
+                                <td><img status="small" onclick="imgClick(this)" src="image\20180508181936.png" alt="" width="200px"></td>
                             </tr>
-                        {% elif msg.3 and msg.0=="info" %}
-                            <tr class="keyword-success">
-                                <th>{{ msg.1 }}</th>
-                                <td>{{ msg.2 }}</td>
-                            </tr>
-                        {% elif msg.3 and msg.0=="error" %}
-                            <tr class="keyword-error">
-                                <th>{{ msg.1 }}</th>
-                                <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                            </tr>
-                        {% elif msg.0=="error" %}
-                            <tr class="log-error">
-                                <th>{{ msg.1 }}</th>
-                                <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <th>{{ msg.1 }}</th>
-                                <td>{{ msg.2 }}</td>
-                            </tr>
-                        {% endif %}
+                        
 
-                    {% endfor %}
+                    
+                        
+                            <tr class="keyword-success">
+                                <th>2018-05-08 18:19:37.305</th>
+                                <td>Common.touchById(self.ad, "com.joom:id/search_field")</td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr>
+                                <th></th>
+                                <td><img status="small" onclick="imgClick(this)" src="image\20180508181939.png" alt="" width="200px"></td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr class="keyword-success">
+                                <th>2018-05-08 18:19:40.217</th>
+                                <td>Common.sendText(self.ad, "Book", resourceId="com.joom:id/query_field")</td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr>
+                                <th></th>
+                                <td><img status="small" onclick="imgClick(this)" src="image\20180508181940.png" alt="" width="200px"></td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr class="keyword-success">
+                                <th>2018-05-08 18:19:41.309</th>
+                                <td>Common.press(self.ad, "enter")</td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr>
+                                <th></th>
+                                <td><img status="small" onclick="imgClick(this)" src="image\20180508181942.png" alt="" width="200px"></td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr class="keyword-success">
+                                <th>2018-05-08 18:19:42.510</th>
+                                <td>Common.sleep(self.ad, 3)</td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr>
+                                <th></th>
+                                <td><img status="small" onclick="imgClick(this)" src="image\20180508181945.png" alt="" width="200px"></td>
+                            </tr>
+                        
+
+                    
+                        
+                            <tr class="keyword-success">
+                                <th>2018-05-08 18:19:46.150</th>
+                                <td>------------------------------------ Test_002 test end  ----------------------------------------</td>
+                            </tr>
+                        
+
+                    
                 </tbody>
             </table>
         </div>
-    {% endif %}
+    
 
-    {% if teardown_msg %}
+    
         <div>
         <h2 style="margin-top: 30px;margin-bottom: 10px">tearDown</h2>
         <table class="details" style="width: 105em">
             <tbody>
-                {% for msg in teardown_msg %}
-                    {% if msg.3 =="img_path" %}
+                
+                    
+                        <tr class="keyword-success">
+                            <th>2018-05-08 18:19:46.351</th>
+                            <td>------------------------------------ Test_002 tearDown start  ----------------------------------</td>
+                        </tr>
+                    
+
+                
+                    
+                        <tr class="keyword-success">
+                            <th>2018-05-08 18:19:46.358</th>
+                            <td>Common.closeApp(self.ad, 'com.joom')</td>
+                        </tr>
+                    
+
+                
+                    
                         <tr>
                             <th></th>
-                            <td><img status="small" onclick="imgClick(this)" src="{{ msg.2 }}" alt="" width="200px"></td>
+                            <td><img status="small" onclick="imgClick(this)" src="image\20180508181947.png" alt="" width="200px"></td>
                         </tr>
-                    {% elif msg.3 and msg.0=="info" %}
-                        <tr class="keyword-success">
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% elif msg.3 and msg.0=="error" %}
-                        <tr class="keyword-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% elif msg.0=="error" %}
-                        <tr class="log-error">
-                            <th>{{ msg.1 }}</th>
-                            <td><pre style="font-family: Helvetica, sans-serif;margin: 0">{{ msg.2 }}</pre></td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th>{{ msg.1 }}</th>
-                            <td>{{ msg.2 }}</td>
-                        </tr>
-                    {% endif %}
+                    
 
-                {% endfor %}
+                
+                    
+                        <tr class="keyword-success">
+                            <th>2018-05-08 18:19:47.555</th>
+                            <td>------------------------------------ Test_002 tearDown end  ------------------------------------</td>
+                        </tr>
+                    
+
+                
+                    
+                        <tr class="keyword-success">
+                            <th>2018-05-08 18:19:47.555</th>
+                            <td>------------------------------------ TestCase Test_002 PASS  ------------------------------------</td>
+                        </tr>
+                    
+
+                
             </tbody>
         </table>
     </div>
-    {% endif %}
+    
 
     <div style="height: 200px">&nbsp;</div>
 </div>
