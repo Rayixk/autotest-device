@@ -43,11 +43,11 @@ class _Outcome(object):
     @property
     def testResult(self):
         if self.success:
-            return "passed"
+            return "pass"
         for test, exc_info in self.errors:
             if exc_info is not None:
                 if issubclass(exc_info[0], AssertionError):
-                    return "failed"
+                    return "fail"
                 else:
                     return "error"
 
@@ -101,7 +101,7 @@ class TestCase(unittest.TestCase):
         self.screen_shot_dir = os.path.join(self.report_dir, "image")
         VAR.screen_shot_dir = self.screen_shot_dir
         os.makedirs(self.report_dir,exist_ok=True)
-        if VAR.screen_shot:
+        if VAR.screen_shot in ["true","True",]:
             os.makedirs(self.screen_shot_dir, exist_ok=True)
 
     def run(self, result=None):
@@ -192,11 +192,12 @@ class TestCase(unittest.TestCase):
                         self._addUnexpectedSuccess(result)
                 else:
                     result.addSuccess(self)
-            if outcome.testResult == "passed":
-                self.log.info("------------------------------------ TestCase {} PASSED  ------------------------------------".format(self.case_name),teseCase_end=True)
+            if outcome.testResult == "pass":
+                self.log.info("------------------------------------ TestCase {} PASS  ------------------------------------".format(self.case_name),teseCase_end=True)
             else:
                 self.log.error("------------------------------------ TestCase {} {}  ------------------------------------".format(self.case_name,outcome.testResult.upper()),teseCase_end=True)
-            self.collect_something(outcome)
+            self.collect_something(outcome,result)
+            result.testCases.append(self) # add by yang
             generate_case_report(self)
             return result
         finally:
@@ -216,21 +217,20 @@ class TestCase(unittest.TestCase):
             self._outcome = None
 
     # ----add begin----
-    def collect_something(self, outcome):
+    def collect_something(self, outcome,result):
         self.stopTime = datetime.datetime.now()
         self.testResult = outcome.testResult
-
-        t = dict(zip(("h", "min", "s"), str(self.stopTime - self.startTime).split(":")))
-        t["h"] = t["h"].strip("0")
-        t["min"] = t["min"].strip("0")
-        t["s"] = t["s"][1:-3] if t["s"].startswith("0") else t["s"][0:-3]
-
-        self.timeTaken = " ".join(("".join((j, i)) for i, j in t.items() if j))
-
+        self.timeTaken = result.getTimeTaken(self.stopTime,self.startTime)
         self.startTime = str(self.startTime)[:-7]
         self.stopTime = str(self.stopTime)[:-7]
+        self.report_href = "{}/{}.html".format(self.case_name,self.case_name)
 
-
+        if not outcome.success:
+            for i in outcome.errors:
+                if i[1]:
+                    t = i[1]
+                    self.message = "{}：{}".format(str(t[0])[8:-2],t[1])
+                    break
 
     def parse_doc(self, doc):
         """从当前用例doc解析出用例信息,如Title"""

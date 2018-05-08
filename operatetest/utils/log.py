@@ -69,7 +69,7 @@ class Logger(object):
             cls.console_handler.setLevel(cls.console_output_level)
             cls.logger.addHandler(cls.console_handler)
 
-            file_handler = logging.FileHandler(filename=os.path.join(VAR.report_dir, settings.LOG["file_name"]), encoding='utf-8')
+            file_handler = logging.FileHandler(filename=os.path.join(VAR.report_dir, "task_{}.log".format(VAR.project_start_time)), encoding='utf-8')
             file_handler.setFormatter(cls.file_pattern)
             file_handler.setLevel(cls.file_output_level)
             cls.logger.addHandler(file_handler)

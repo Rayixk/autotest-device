@@ -163,3 +163,37 @@ def bubble_sort(li):
                 li[j], li[j + 1] = li[j + 1], li[j]
 
     return li
+
+
+
+def generate_task_report(self):
+    """self:instance of result"""
+    self.task_status = "success"
+    self.pass_cases_count = self.testsRun
+    self.fail_cases_count = 0
+
+    if len(self.errors) > 0 or len(self.failures) > 0:
+        self.task_status = "fail"
+        self.fail_cases_count = len(self.errors) + len(self.failures)
+        self.pass_cases_count = self.testsRun - self.fail_cases_count
+
+    p = os.path.join(BASE_DIR, "operatetest", "resources", "template1.html")
+    with open(p, encoding='utf-8') as f:
+        content = f.read()
+
+    template = Template(content)
+
+    context = {
+        "result": self,
+    }
+    t = template.render(context)
+
+    self.report_path = os.path.join(VAR.report_dir, "index.html")
+    f = open(self.report_path, "w", encoding='utf-8')
+    f.write(t)
+    f.flush()
+
+    t = 'Generate Task Report > {}'.format(self.report_path)
+    msg = "ALL Task Done，The Result is Total：{}  Pass：{}  Fail：{}  Error：{}".format(self.testsRun,self.testsRun-(len(self.failures)+len(self.errors)),len(self.failures),len(self.errors))
+    self.log.info(t)
+    self.log.info(msg)

@@ -49,11 +49,12 @@ VAR = Variable()
 
 
 def handle_config():
+    VAR.project_start_time = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     if not os.path.isabs(VAR.report_dir):
-        now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        cur_dir = os.path.join(settings.BASE_DIR, VAR.report_dir, now)
-        os.makedirs(cur_dir, exist_ok=True)
-        setattr(VAR, "report_dir", cur_dir)
+        VAR.report_dir = os.path.join(settings.BASE_DIR, VAR.report_dir, "task_{}".format(VAR.project_start_time))
+    else:
+        VAR.report_dir = os.path.join(VAR.report_dir, "task_{}".format(VAR.project_start_time))
+    os.makedirs(VAR.report_dir, exist_ok=True)
 
 
 class TimeList(object):

@@ -2,6 +2,7 @@
 
 import sys
 import time
+import datetime
 import warnings
 
 from unittest import result
@@ -40,6 +41,7 @@ class TextTestResult(result.TestResult):
         self.showAll = verbosity > 1
         self.dots = verbosity == 1
         self.descriptions = descriptions
+        self.testCases = []  # add by yang
 
     def getDescription(self, test):
         doc_first_line = test.shortDescription()
@@ -116,6 +118,17 @@ class TextTestResult(result.TestResult):
             self.stream.writeln(self.separator2)
             self.stream.writeln("%s" % err)
 
+    def getTimeTaken(self,stopTime,startTime):
+        """get difference of the two time..add by yang"""
+        t = dict(zip(("h", "min", "s"), str(stopTime - startTime).split(":")))
+        t["h"] = t["h"].strip("0")
+        t["min"] = t["min"].strip("0")
+        t["s"] = t["s"][1:-3] if t["s"].startswith("0") else t["s"][0:-3]
+
+        timeTaken = " ".join(("".join((j, i)) for i, j in t.items() if j))
+        return timeTaken
+
+
 
 class TextTestRunner(object):
     """A test runner class that displays results in textual form.
@@ -168,7 +181,7 @@ class TextTestRunner(object):
                     warnings.filterwarnings('module',
                             category=DeprecationWarning,
                             message=r'Please use assert\w+ instead.')
-            startTime = time.time()
+            startTime = datetime.datetime.now()
             startTestRun = getattr(result, 'startTestRun', None)
             if startTestRun is not None:
                 startTestRun()
@@ -178,12 +191,11 @@ class TextTestRunner(object):
                 stopTestRun = getattr(result, 'stopTestRun', None)
                 if stopTestRun is not None:
                     stopTestRun()
-            stopTime = time.time()
-        timeTaken = stopTime - startTime
+            stopTime = datetime.datetime.now()
+        result.timeTaken = result.getTimeTaken(stopTime,startTime)
         #add by yang
-        result.startTime = startTime
-        result.stopTime = stopTime
-        result.timeTaken = timeTaken
+        result.startTime = str(startTime)[:-7]
+        result.stopTime = str(stopTime)[:-7]
 
         # result.printErrors()  annotate by yang
         # if hasattr(result, 'separator2'):
