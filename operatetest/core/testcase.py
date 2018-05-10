@@ -1,14 +1,13 @@
 import contextlib
 import unittest
 
-import sys, re,os
+import sys, re, os
 
 import time
 
 import datetime
 
-from ..auxiliary import VAR
-from ..utils import Logger
+from ..contrib import VAR, Logger
 from .report import generate_case_report
 
 __all__ = ["TestCase"]
@@ -95,14 +94,16 @@ class TestCase(unittest.TestCase):
         self.startTime = datetime.datetime.now()
         VAR.cur_case_name = self.case_name
         s = sys.modules[self.__module__]
-        self.log.info(s.__file__)
+        self.log.info(s.__file__, file_path=True)
         self.parse_doc(s.__doc__)
-        self.report_dir = os.path.join(VAR.report_dir,self.case_name)
+        self.report_dir = os.path.join(VAR.report_dir, self.case_name)
         self.screen_shot_dir = os.path.join(self.report_dir, "image")
         VAR.screen_shot_dir = self.screen_shot_dir
-        os.makedirs(self.report_dir,exist_ok=True)
-        if VAR.screen_shot in ["true","True",]:
-            os.makedirs(self.screen_shot_dir, exist_ok=True)
+
+        if VAR.mode == 1:
+            os.makedirs(self.report_dir, exist_ok=True)
+            if VAR.screen_shot in ["true", "True", ]:
+                os.makedirs(self.screen_shot_dir, exist_ok=True)
 
     def run(self, result=None):
         self.init()
@@ -135,7 +136,9 @@ class TestCase(unittest.TestCase):
         try:
             self._outcome = outcome
 
-            self.log.info("------------------------------------ {} setUp start  -------------------------------------".format(self.case_name), setUp_start=True)
+            self.log.info(
+                "------------------------------------ {} setUp start  -------------------------------------".format(
+                    self.case_name), setUp_start=True)
             with outcome.testPartExecutor(self):
                 try:
                     self.setUp()
@@ -143,14 +146,20 @@ class TestCase(unittest.TestCase):
                     self.log.exception(e)
                     raise e
             if outcome.success:
-                self.log.info("------------------------------------ {} setUp end  ---------------------------------------".format(self.case_name), setUp_end=True)
+                self.log.info(
+                    "------------------------------------ {} setUp end  ---------------------------------------".format(
+                        self.case_name), setUp_end=True)
             else:
-                self.log.error("----------------------------------- {} setUp end  ---------------------------------------".format(self.case_name), setUp_end=True)
+                self.log.error(
+                    "----------------------------------- {} setUp end  ---------------------------------------".format(
+                        self.case_name), setUp_end=True)
 
             time.sleep(0.2)
             if outcome.success:
                 outcome.expecting_failure = expecting_failure
-                self.log.info("------------------------------------ {} test start  --------------------------------------".format(self.case_name),test_start=True)
+                self.log.info(
+                    "------------------------------------ {} test start  --------------------------------------".format(
+                        self.case_name), test_start=True)
                 with outcome.testPartExecutor(self, isTest=True):
                     try:
                         testMethod()
@@ -158,16 +167,22 @@ class TestCase(unittest.TestCase):
                         self.log.exception(e)
                         raise e
                 if outcome.success:
-                    self.log.info("------------------------------------ {} test end  ----------------------------------------".format(self.case_name),test_end=True)
+                    self.log.info(
+                        "------------------------------------ {} test end  ----------------------------------------".format(
+                            self.case_name), test_end=True)
                 else:
-                    self.log.error("------------------------------------ {} test end  ----------------------------------------".format(self.case_name),test_end=True)
+                    self.log.error(
+                        "------------------------------------ {} test end  ----------------------------------------".format(
+                            self.case_name), test_end=True)
 
                 outcome.expecting_failure = False
 
                 time.sleep(0.2)
-                self.log.info("------------------------------------ {} tearDown start  ----------------------------------".format(self.case_name),tearDown_start=True)
+                self.log.info(
+                    "------------------------------------ {} tearDown start  ----------------------------------".format(
+                        self.case_name), tearDown_start=True)
 
-                is_teardown_success=True
+                is_teardown_success = True
                 with outcome.testPartExecutor(self):
                     try:
                         self.tearDown()
@@ -176,9 +191,13 @@ class TestCase(unittest.TestCase):
                         self.log.exception(e)
                         raise e
                 if is_teardown_success:
-                    self.log.info("------------------------------------ {} tearDown end  ------------------------------------".format(self.case_name),tearDown_end=True)
+                    self.log.info(
+                        "------------------------------------ {} tearDown end  ------------------------------------".format(
+                            self.case_name), tearDown_end=True)
                 else:
-                    self.log.error("------------------------------------ {} tearDown end  ------------------------------------".format(self.case_name), tearDown_end=True)
+                    self.log.error(
+                        "------------------------------------ {} tearDown end  ------------------------------------".format(
+                            self.case_name), tearDown_end=True)
 
             self.doCleanups()
             for test, reason in outcome.skipped:
@@ -193,11 +212,15 @@ class TestCase(unittest.TestCase):
                 else:
                     result.addSuccess(self)
             if outcome.testResult == "pass":
-                self.log.info("------------------------------------ TestCase {} PASS  ------------------------------------".format(self.case_name),teseCase_end=True)
+                self.log.info(
+                    "------------------------------------ TestCase {} PASS  ------------------------------------".format(
+                        self.case_name), teseCase_end=True)
             else:
-                self.log.error("------------------------------------ TestCase {} {}  ------------------------------------".format(self.case_name,outcome.testResult.upper()),teseCase_end=True)
-            self.collect_something(outcome,result)
-            result.testCases.append(self) # add by yang
+                self.log.error(
+                    "------------------------------------ TestCase {} {}  ------------------------------------".format(
+                        self.case_name, outcome.testResult.upper()), teseCase_end=True)
+            self.collect_something(outcome, result)
+            result.testCases.append(self)  # add by yang
             generate_case_report(self)
             return result
         finally:
@@ -217,23 +240,24 @@ class TestCase(unittest.TestCase):
             self._outcome = None
 
     # ----add begin----
-    def collect_something(self, outcome,result):
+    def collect_something(self, outcome, result):
         self.stopTime = datetime.datetime.now()
         self.testResult = outcome.testResult
-        self.timeTaken = result.getTimeTaken(self.stopTime,self.startTime)
+        self.timeTaken = result.getTimeTaken(self.stopTime, self.startTime)
         self.startTime = str(self.startTime)[:-7]
         self.stopTime = str(self.stopTime)[:-7]
-        self.report_href = "{}/{}.html".format(self.case_name,self.case_name)
+        self.report_href = "{}/{}.html".format(self.case_name, self.case_name)
 
         if not outcome.success:
             for i in outcome.errors:
                 if i[1]:
                     t = i[1]
-                    self.message = "{}：{}".format(str(t[0])[8:-2],t[1])
+                    self.message = "{}：{}".format(str(t[0])[8:-2], t[1])
                     break
 
     def parse_doc(self, doc):
         """从当前用例doc解析出用例信息,如Title"""
-        ret = re.search(r'@Title：(.*)', doc)
-        if ret:
-            self.case_title = ret.group(1)
+        if doc:
+            ret = re.search(r'@Title：(.*)', doc)
+            if ret:
+                self.case_title = ret.group(1)

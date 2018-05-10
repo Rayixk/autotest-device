@@ -7,20 +7,19 @@ class Test_001(TestCase):
         pass
 
     def test(self):
-        common.launchApp(self.ad,'com.netease.cloudmusic')
-        common.touchByText(self.ad,'私人FM')
-        common.touchByDesc(self.ad,'转到上一层级')
+        Common.launchApp(self.ad,'com.netease.cloudmusic')
+        Common.touchByText(self.ad,'私人FM')
+        Common.touchByDesc(self.ad,'转到上一层级')
 
-        common.touchByText(self.ad, '每日推荐')
-        common.touchByDesc(self.ad, '转到上一层级')
+        Common.touchByText(self.ad, '每日推荐')
+        Common.touchByDesc(self.ad, '转到上一层级')
 
-        common.touchByText(self.ad, '歌单')
-        common.touchByDesc(self.ad, '转到上一层级')
+        Common.touchByText(self.ad, '歌单')
+        Common.touchByDesc(self.ad, '转到上一层级')
 
-        common.touchByText(self.ad, '排行榜')
-        common.touchByDesc(self.ad, '转到上一层级')
+        Common.touchByText(self.ad, '排行榜')
+        Common.touchByDesc(self.ad, '转到上一层级')
 
-        common.stopApp(self.ad, 'com.netease.cloudmusic')
-
+        # Common.stopApp(self.ad, 'com.netease.cloudmusic')
     def tearDown(self):
         pass

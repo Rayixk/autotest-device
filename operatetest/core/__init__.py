@@ -1,3 +1,4 @@
+from ..contrib import *
 from .testcase import *
 from .uiautomator import *
-from .decorator import *
+from .deco import *

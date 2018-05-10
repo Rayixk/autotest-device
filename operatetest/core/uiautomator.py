@@ -67,8 +67,8 @@ else:  # for py3
     import urllib.parse as urlparse
 
 import requests
-from . import adb
-from ..utils import logger
+from . import adbutil
+from ..contrib import logger
 
 DEBUG = False
 HTTP_TIMEOUT = 60
@@ -210,7 +210,7 @@ def connect_usb(serial=None):
     Args:
         serial (str): android device serial
     """
-    _adb = adb.Adb(serial)
+    _adb = adbutil.Adb(serial)
     lport = _adb.forward_port(7912)
     return connect_wifi('127.0.0.1:' + str(lport))
 

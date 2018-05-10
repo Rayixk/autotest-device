@@ -1,6 +1,7 @@
+import os
+import sys
 import importlib
-import os, sys
-from .log import logger
+import traceback
 
 __all__ = ["path_join","make_dirs","get_all_files","import_module"]
 
@@ -36,8 +37,8 @@ def import_module(module_path):
         sys.path.pop(0)
         return module
     except ImportError as e:
-        logger.exception(e)
-        raise Exception("module can not import")
+        traceback.print_exc()
+        raise Exception("Module Can Not Import:{}".format(module_path))
 
 
 

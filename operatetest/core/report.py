@@ -6,11 +6,15 @@ import os
 import copy
 import datetime
 from jinja2 import Template
-from ..auxiliary import VAR, BASE_DIR
+from ..contrib import VAR, BASE_DIR
 
 
 def generate_case_report(self):
     """self:instance of TestCase"""
+
+    if VAR.mode != 1:
+        return
+
     p = os.path.join(BASE_DIR, "operatetest", "resources", "template0.html")
     with open(p, encoding='utf-8') as f:
         content = f.read()
@@ -168,6 +172,8 @@ def bubble_sort(li):
 
 def generate_task_report(self):
     """self:instance of result"""
+    if VAR.mode != 1:
+        return
     self.task_status = "success"
     self.pass_cases_count = self.testsRun
     self.fail_cases_count = 0
@@ -194,6 +200,27 @@ def generate_task_report(self):
     f.flush()
 
     t = 'Generate Task Report > {}'.format(self.report_path)
-    msg = "ALL Task Done，The Result is Total：{}  Pass：{}  Fail：{}  Error：{}".format(self.testsRun,self.testsRun-(len(self.failures)+len(self.errors)),len(self.failures),len(self.errors))
     self.log.info(t)
+
+    report_str = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script language="javascript" type="text/javascript">
+    // 以下方式直接跳转
+    window.location.href = '{{ report_dir }}/index.html';
+</script>
+</body>
+</html>
+    """
+    report_html = os.path.join(os.path.dirname(VAR.report_dir), "report.html")
+    with open(report_html, "w", encoding="utf-8") as f:
+        f.write(report_str.replace("{{ report_dir }}",os.path.basename(VAR.report_dir)))
+
+    msg = "ALL Task Done，The Result is Total：{}  Pass：{}  Fail：{}  Error：{}".format(self.testsRun, self.testsRun - (
+    len(self.failures) + len(self.errors)), len(self.failures), len(self.errors))
     self.log.info(msg)

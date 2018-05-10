@@ -13,8 +13,9 @@ from aw import *
 from operatetest import *
 
 class Test_002(TestCase):
+
     def setUp(self):
-        Common.launchApp(self.ad, 'com.joom')
+        Common.launchApp(self.ad, "com.joom")
 
     def test(self):
         Common.touchById(self.ad, "com.joom:id/menu_search")
