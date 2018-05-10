@@ -25,9 +25,12 @@ class Logger(object):
             if "img_path" in kwargs:
                 VAR.stdout.l.append(msg, *list(kwargs.keys()))
 
-
     def info(self,msg,**kwargs):
+        l = ["setUp_start","setUp_end","test_start","test_end","tearDown_start","tearDown_end","teseCase_end","file_path"]
         self.console_handler.stream = sys.stdout
+        if VAR.mode == 3 and kwargs:
+            if list(kwargs.keys())[0] in l:
+                return
         self.logger.info(msg, **kwargs)
         self.console_handler.stream = sys.stderr
 

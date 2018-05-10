@@ -9,7 +9,7 @@ import subprocess
 
 import whichcraft
 
-from operatetest.contrib import log
+from operatetest.contrib import logger
 
 
 def find_free_port():
@@ -38,7 +38,7 @@ class Adb(object):
         cmds = [adb_path, '-s', self._serial] if self._serial else [adb_path]
         cmds.extend(args)
         cmdline = subprocess.list2cmdline(map(str, cmds))
-        log.debug(cmdline)
+        logger.debug(cmdline)
         try:
             return subprocess.check_output(
                 cmdline, stderr=subprocess.STDOUT, shell=True).decode('utf-8')

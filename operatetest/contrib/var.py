@@ -117,15 +117,8 @@ class OutputRedirector(object):
         self.l = TimeList()
 
     def write(self, s, **kwargs):
-        if VAR.mode != 3:
-            self.fp.write(s)
-            self.l.append(s, *list(kwargs.keys()))
-
-        elif not kwargs or "keyword" in kwargs:
-            if s!="\n":
-                self.fp.write(s)
-                self.fp.write('\n')
-                self.l.append(s, *list(kwargs.keys()))
+        self.fp.write(s)
+        self.l.append(s, *list(kwargs.keys()))
 
     def flush(self):
         self.fp.flush()
