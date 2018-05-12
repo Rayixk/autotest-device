@@ -7,9 +7,12 @@ import re
 import socket
 import subprocess
 
+import time
+
+import requests
 import whichcraft
 
-from operatetest.contrib import logger
+from ..contrib import logger
 
 
 def find_free_port():
@@ -24,6 +27,7 @@ def find_free_port():
 class Adb(object):
     def __init__(self, serial=None):
         self._serial = serial
+        self.server_addr = None
 
     def adb_path(self):
         return whichcraft.which("adb")
@@ -130,3 +134,53 @@ class Adb(object):
         m = re.search(r'PackageSignatures\{(.*?)\}', output)
         signature = m.group(1) if m else None
         return dict(version_name=version_name, signature=signature)
+
+    def launch_and_check(self):
+        if self.check():
+            return
+        logger.debug("launch atx-agent daemon")
+        args = ['TMPDIR=/sdcard', '/data/local/tmp/atx-agent', '-d']
+        if self.server_addr:
+            args.append('-t')
+            args.append(self.server_addr)
+        output = self.shell(*args)
+        lport = self.forward_port(7912)
+        logger.debug("forward device(port:7912) -> %d" % lport)
+        time.sleep(.5)
+        cnt = 0
+        while cnt < 3:
+            try:
+                r = requests.get(
+                    'http://localhost:%d/version' % lport, timeout=3)
+                logger.debug("atx-agent version: %s" % r.text)
+                # todo finish the retry logic
+                logger.info("atx-agent output: %s" % output.strip())
+                # open uiautomator2 github URL
+                # self.shell("am", "start", "-a", "android.intent.action.VIEW",
+                #            "-d", "https://github.com/openatx/uiautomator2")
+                logger.debug("launch atx-agent daemon success")
+                return True
+            except requests.exceptions.ConnectionError:
+                time.sleep(.5)
+                cnt += 1
+        else:
+            logger.error("failure")
+
+    def check(self):
+        lport = self.forward_port(7912)
+        logger.debug("forward device(port:7912) -> %d" % lport)
+        time.sleep(.5)
+        cnt = 0
+        while cnt < 3:
+            try:
+                r = requests.get(
+                    'http://localhost:%d/version' % lport, timeout=3)
+                logger.debug("atx-agent version: %s" % r.text)
+                # todo finish the retry logic
+                logger.debug("atx-agent daemon is running")
+                return True
+            except requests.exceptions.ConnectionError:
+                time.sleep(.5)
+                cnt += 1
+        else:
+            logger.debug("atx-agent daemon is not running")

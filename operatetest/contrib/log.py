@@ -14,6 +14,8 @@ class Logger(object):
     def __init__(self,logger,console_handler):
         self.logger = logger
         self.console_handler=console_handler
+        self.l = ["setUp_start", "setUp_end", "test_start", "test_end", "tearDown_start", "tearDown_end", "teseCase_end",
+             "file_path"]
 
     def debug(self,msg,**kwargs):
         self.console_handler.stream = sys.stdout
@@ -26,10 +28,9 @@ class Logger(object):
                 VAR.stdout.l.append(msg, *list(kwargs.keys()))
 
     def info(self,msg,**kwargs):
-        l = ["setUp_start","setUp_end","test_start","test_end","tearDown_start","tearDown_end","teseCase_end","file_path"]
         self.console_handler.stream = sys.stdout
         if VAR.mode == 3 and kwargs:
-            if list(kwargs.keys())[0] in l:
+            if list(kwargs.keys())[0] in self.l:
                 return
         self.logger.info(msg, **kwargs)
         self.console_handler.stream = sys.stderr
@@ -40,6 +41,9 @@ class Logger(object):
         self.console_handler.stream = sys.stderr
 
     def error(self,msg,**kwargs):
+        if VAR.mode == 3 and kwargs:
+            if list(kwargs.keys())[0] in self.l:
+                return
         self.logger.error(msg,**kwargs)
 
     def fatal(self,msg):
