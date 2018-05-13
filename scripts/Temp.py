@@ -8,7 +8,7 @@ class Temp(TestCase):
         pass
 
     def test(self):
-        Common.press(self.ad, "enter")
+        Common.checkIfTextExist(self.ad,"Sort1")
 
 
     def tearDown(self):

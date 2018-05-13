@@ -22,6 +22,7 @@ class Test_001(TestCase):
         Common.sendText(self.ad, "T-sheet", resourceId="com.joom:id/query_field")
         Common.press(self.ad, "enter")
         Common.wait(self.ad, 5)
+        Common.checkIfTextExist(self.ad, "Sort")
 
     def tearDown(self):
         Common.closeApp(self.ad, 'com.joom')

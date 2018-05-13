@@ -137,7 +137,7 @@ class Adb(object):
 
     def launch_and_check(self):
         if self.check():
-            return
+            return True
         logger.debug("launch atx-agent daemon")
         args = ['TMPDIR=/sdcard', '/data/local/tmp/atx-agent', '-d']
         if self.server_addr:

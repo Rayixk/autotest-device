@@ -2,11 +2,11 @@
 
 import time
 
-from operatetest import keyword
+from operatetest import keyword, checpter
 
 
 @keyword
-def wait(ad,n):
+def wait(ad, n):
     time.sleep(n)
 
 
@@ -94,3 +94,15 @@ def press(ad, key):
 def screenshot(ad):
     image = ad.screenshot()
     image.save("home.jpg")
+
+
+@checpter
+def checkIfTextExist(ad, text, expect=True):
+    """
+    检查text是否存在,默认期望存在
+    :param ad: 
+    :param text: 
+    :param expect: 默认期望存在
+    :return: 
+    """
+    return expect == ad(text=text).exists

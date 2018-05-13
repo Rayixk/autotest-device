@@ -8,8 +8,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 
 LOG = {
-    # "console_level": "INFO",
-    "console_level": "DEBUG",
+    "console_level": "INFO",
+    # "console_level": "DEBUG",
     "file_level": "DEBUG",
     "console_pattern": "%(asctime)s  %(levelname)s : %(message)s",
     "file_pattern": "%(asctime)s  %(name)s  %(levelname)s : %(message)s",

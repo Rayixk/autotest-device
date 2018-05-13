@@ -8,8 +8,38 @@ from ..contrib import VAR
 from .uiautomator import UIAutomatorServer
 
 
-__all__ = ["keyword"]
+__all__ = ["keyword","checpter"]
 import inspect
+
+
+def checpter(func):
+    @functools.wraps(func)
+    def inner(ad, *args, **kwargs):
+        name = func.__name__
+        curr_line = inspect.stack()[1][4][0].strip().strip("\n")
+
+        # 确保记录的log不包含不应该包含的内容
+        ret = re.search(r'{}.*?\)+'.format(name), curr_line)
+        if ret:
+            t = ret.group(0)
+            a, b = curr_line.split(t)
+            curr_line = "".join([a, t])
+            ad.log.info(curr_line, keyword=True)
+
+        res = func(ad, *args, **kwargs)
+
+        _screenshot(ad)
+
+        if not res:
+            raise AssertionError(curr_line)
+
+        ad.log.info(res)
+        return res
+
+    return inner
+
+
+
 
 def keyword(func):
     @functools.wraps(func)
@@ -29,6 +59,7 @@ def keyword(func):
 
         _screenshot(ad)
 
+        ad.log.info("True")
         return res
 
     return inner
