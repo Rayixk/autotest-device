@@ -8,6 +8,10 @@ from operatetest import *
 def initialize():
     try:
         try:
+            if VAR.sn:
+                from operatetest.core.adbutil import Adb
+                if not Adb(VAR.sn).launch_and_check():
+                    raise Exception("launch atx-agent daemon failure")
             ad = connect(VAR.sn)
         except Exception as e:
             ad = connect(VAR.device_ip)

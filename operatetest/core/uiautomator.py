@@ -353,7 +353,7 @@ class UIAutomatorServer(object):
             return self.jsonrpc_call(*args, **kwargs)
         except (GatewayError, UiAutomationNotConnectedError):
             # warnings.warn("uiautomator2 is down, restart.", RuntimeWarning, stacklevel=1) #modify by yang
-            logger.warn("uiautomator2 is down, restart.")
+            logger.debug("uiautomator2 is down, restart.")
             # for XiaoMi, want to recover uiautomator2 must start app:com.github.uiautomator
             self.healthcheck(unlock=False)
             return self.jsonrpc_call(*args, **kwargs)
