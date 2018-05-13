@@ -5,7 +5,6 @@
 *.pyc
 out
 gen
-ztest
 report
 
 
